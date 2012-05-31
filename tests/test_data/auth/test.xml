@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+	<table name="test_roles">
+		<column>id</column>
+		<column>name</column>
+		<column>description</column>
+		<row>
+			<value>1</value>
+			<value>login</value>
+			<value>Login Permssion</value>
+		</row>
+		<row>
+			<value>2</value>
+			<value>admin</value>
+			<value>Admin Permssion</value>
+		</row>
+	</table>
+
+	<table name="test_users">
+		<column>id</column>
+		<column>email</column>
+		<column>username</column>
+		<column>password</column>
+		<column>logins</column>
+		<column>last_login</column>
+		<column>last_login_ip</column>
+		<column>facebook_uid</column>
+		<row>
+			<value>1</value>
+			<value>admin@example.com</value>
+			<value>admin</value>
+			<value>519b05d6ffcab58b7525cdea9c58a8fdb4584e3bd41427db1fcc20ef05dafad6</value>
+			<value>5</value>
+			<value>LAST MONTH</value>
+			<value>10.20.10.1</value>
+			<value>facebook-test</value>
+		</row>
+		<row>
+			<value>2</value>
+			<value>user@example.com</value>
+			<value>user</value>
+			<value>519b05d6ffcab58b7525cdea9c58a8fdb4584e3bd41427db1fcc20ef05dafad6</value>
+			<value>20</value>
+			<value>LAST WEEK</value>
+			<value>10.20.10.2</value>
+			<value></value>
+		</row>
+	</table>
+
+	<table name="test_roles_users">
+		<column>test_user_id</column>
+		<column>test_role_id</column>
+		<row>
+			<value>1</value>
+			<value>1</value>
+		</row>
+		<row>
+			<value>1</value>
+			<value>2</value>
+		</row>
+		<row>
+			<value>2</value>
+			<value>1</value>
+		</row>
+	</table>
+
+	<table name="test_user_tokens">
+		<column>id</column>
+		<column>test_user_id</column>
+		<column>user_agent</column>
+		<column>token</column>
+		<column>type</column>
+		<column>created</column>
+		<column>expires</column>
+		<row>
+			<value>1</value>
+			<value>1</value>
+			<!-- Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.162 Safari/535.19 -->
+			<value>92b1e2f536fa11fa996731b98b219f837d4436c8</value>
+			<value>4c14538f3c4a3b8cf30086958911d0d0ae1b2eb7</value>
+			<value></value>
+			<value>LAST WEEK</value>
+			<value>TOMORROW</value>
+		</row>
+		<row>
+			<value>2</value>
+			<value>2</value>
+			<value>92b1e2f536fa11fa996731b98b219f837d4436c8</value>
+			<value>f0dc12b77cf0214fbd04e2a224422f44adc7652c</value>
+			<value></value>
+			<value>LAST WEEK</value>
+			<value>TOMORROW</value>
+		</row>
+		<row>
+			<value>3</value>
+			<value>1</value>
+			<value>4c14538f3c4a3b8cf30086958911d0d0ae1b2eb7</value>
+			<value>59ed73c1a3c105e7409c69c21770d674949c07e9</value>
+			<value></value>
+			<value>LAST MONTH</value>
+			<value>LAST WEEK</value>
+		</row>
+	</table>
+</dataset>
