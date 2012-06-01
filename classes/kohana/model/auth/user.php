@@ -1,13 +1,15 @@
 <?php defined('SYSPATH') or die('No direct access allowed.');
 /**
- * Default auth user
- *
+ * Default auth user.
+ * 
  * @package	   Kohana/Auth
+ * @author     Ivan Kerin
+ * @copyright  (c) 2011-2012 OpenBuildings Inc.
  * @author	   creatoro
  * @copyright  (c) 2011 creatoro
  * @license	   http://creativecommons.org/licenses/by-sa/3.0/legalcode
  */
-class Kohana_Model_User extends Jam_Model {
+class Kohana_Model_Auth_User extends Jam_Model {
 
 	public static function initialize(Jam_Meta $meta)
 	{
@@ -62,7 +64,7 @@ class Kohana_Model_User extends Jam_Model {
 			)),
 		));
 
-		$meta->extend('add_password_validation', "Model_User::_add_password_validation");
+		$meta->extend('add_password_validation', "Model_Auth_User::_add_password_validation");
 	}
 
 	static public function _add_password_validation(Jam_Meta $meta)
@@ -112,4 +114,4 @@ class Kohana_Model_User extends Jam_Model {
 		return (bool) $this->facebook_uid;
 	}
 
-} // End Auth User Model
+} // End Kohana_Model_Auth_User

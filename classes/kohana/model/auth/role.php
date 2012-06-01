@@ -3,11 +3,13 @@
  * Default auth role
  *
  * @package	   Kohana/Auth
+ * @author     Ivan Kerin
+ * @copyright  (c) 2011-2012 OpenBuildings Inc.
  * @author	   creatoro
  * @copyright  (c) 2011 creatoro
  * @license	   http://creativecommons.org/licenses/by-sa/3.0/legalcode
  */
-class Kohana_Model_Role extends Jam_Model {
+class Kohana_Model_Auth_Role extends Jam_Model {
 
 	public static function initialize(Jam_Meta $meta)
 	{
@@ -33,4 +35,4 @@ class Kohana_Model_Role extends Jam_Model {
 			'users' => Jam::association('manytomany'),
 		));
 	}
-} // End Auth Role Model
+} // End Kohana_Model_Auth_Role

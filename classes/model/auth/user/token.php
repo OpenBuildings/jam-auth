@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
-class Model_Builder_User extends Kohana_Model_Builder_User {
+class Model_Auth_User_Token extends Kohana_Model_Auth_User_Token {
 
 	// This class can be replaced or extended
 
-} // End Role Model
+} // End Model_Auth_User_Token

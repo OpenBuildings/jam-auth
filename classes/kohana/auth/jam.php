@@ -51,7 +51,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 		if ( ! $user)
 			return FALSE;
 
-		if ($user instanceof Kohana_Model_User AND $user->loaded())
+		if ($user instanceof Model_Auth_User AND $user->loaded())
 		{
 			// If we don't have a roll no further checking is needed
 			if ( ! $role)
@@ -61,7 +61,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 			{
 				return ! array_diff($role, $user->roles->as_array(NULL, 'name'));
 			}
-			elseif (is_string($role) OR $role instanceof Kohana_Model_Role)
+			elseif (is_string($role) OR $role instanceof Model_Auth_Role)
 			{
 				return $user->roles->exists($role);	
 			}

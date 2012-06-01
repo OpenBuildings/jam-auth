@@ -35,7 +35,7 @@ class Auth_Model_UserTest extends Unittest_Auth_TestCase {
 	public function test_find($key, $id)
 	{
 		$builder = Jam::query('test_user', $key);
-		$this->assertInstanceOf('Model_Builder_User', $builder);
+		$this->assertInstanceOf('Model_Builder_Auth_User', $builder);
 		
 		// Select the result
 		$result = $builder->find();

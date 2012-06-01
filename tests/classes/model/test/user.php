@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.'); 
 
-class Model_Test_User extends Kohana_Model_User {
+class Model_Test_User extends Model_Auth_User {
 
 	static public function initialize(Jam_Meta $meta)
 	{
