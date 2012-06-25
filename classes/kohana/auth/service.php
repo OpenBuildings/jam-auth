@@ -90,15 +90,21 @@ abstract class Kohana_Auth_Service {
 				if (isset($data['email']))
 				{
 					$user = Jam::query($this->_user_model)->where('email', '=', $data['email'])->find();
-				}
-				elseif ( ! (Arr::get($this->_config, 'create_user') AND $user = $this->build_user($data, TRUE)))
+				}	
+				
+				if ( ! $user->loaded() AND Arr::get($this->_config, 'create_user'))
 				{
+					$user = $this->build_user($data, TRUE);										
+				}
+								
+				if ( ! $user)
+				{					
 					throw new Auth_Exception_Service('Service :service user with service uid :id does not exist and faild to create', array(
 						':service' => $this->type(),
 						':id' => $this->service_uid()
 					));
 				}
-
+								
 				$user->set($this->_service_field, $this->service_uid());
 				$user->save();
 			}
