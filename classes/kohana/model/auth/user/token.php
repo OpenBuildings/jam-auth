@@ -48,9 +48,9 @@ class Kohana_Model_Auth_User_Token extends Jam_Model {
 		}
 	}
 
-	public function load_values($values)
+	public function load_fields($values)
 	{
-		parent::load_values($values);
+		parent::load_fields($values);
 
 		if ($this->expires < time() AND $this->loaded())
 		{
