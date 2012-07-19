@@ -23,12 +23,12 @@ class Kohana_Model_Auth_User extends Jam_Model {
 
 		$meta->fields(array(
 			'id' => Jam::field('primary'),
-			'email' => Jam::field('email', array(
+			'email' => Jam::field('string', array(
 				'label' => 'email address',
-				'rules' => array(
-					array('not_empty'),
-				),
-				'unique' => TRUE,
+				// 'rules' => array(
+				// 	array('not_empty'),
+				// ),
+				// 'unique' => TRUE,
 			)),
 			'username' => Jam::field('string', array(
 				'label' => 'username',
@@ -58,13 +58,13 @@ class Kohana_Model_Auth_User extends Jam_Model {
 			'twitter_uid' => Jam::field('string'),
 			'last_login_ip' => Jam::field('string', array(
 				'label' => 'Last logged from',
-				'rules' => array(
-					array('ip')
-				)
+				// 'rules' => array(
+				// 	array('ip')
+				// )
 			)),
 		));
 
-		$meta->extend('add_password_validation', "Model_Auth_User::_add_password_validation");
+		// $meta->extend('add_password_validation', "Model_Auth_User::_add_password_validation");
 	}
 
 	static public function _add_password_validation(Jam_Meta $meta)
