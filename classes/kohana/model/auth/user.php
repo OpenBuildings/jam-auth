@@ -11,6 +11,8 @@
  */
 class Kohana_Model_Auth_User extends Jam_Model {
 
+	public $validate_password = FALSE;
+
 	public static function initialize(Jam_Meta $meta)
 	{
 		$meta
@@ -25,27 +27,13 @@ class Kohana_Model_Auth_User extends Jam_Model {
 			'id' => Jam::field('primary'),
 			'email' => Jam::field('string', array(
 				'label' => 'email address',
-				// 'rules' => array(
-				// 	array('not_empty'),
-				// ),
-				// 'unique' => TRUE,
 			)),
 			'username' => Jam::field('string', array(
 				'label' => 'username',
-				'rules' => array(
-					array('not_empty'),
-					array('max_length', array(':value', 32)),
-					array('min_length', array(':value', 3)),
-					array('regex', array(':value', '/^[a-zA-Z0-9\_\-]+$/')),
-				),
 				'unique' => TRUE,
 			)),
 			'password' => Jam::field('password', array(
 				'label' => 'password',
-				'rules' => array(
-					array('min_length', array(':value', 5)),
-					array('max_length', array(':value', 30)),
-				),
 				'hash_with' => array( Auth::instance(), 'hash'),
 			)),
 			'logins' => Jam::field('integer', array(
@@ -58,26 +46,32 @@ class Kohana_Model_Auth_User extends Jam_Model {
 			'twitter_uid' => Jam::field('string'),
 			'last_login_ip' => Jam::field('string', array(
 				'label' => 'Last logged from',
-				// 'rules' => array(
-				// 	array('ip')
-				// )
 			)),
 		));
 
-		// $meta->extend('add_password_validation', "Model_Auth_User::_add_password_validation");
+		$meta
+			->validator('email', array(
+				'format' => array('filter' => FILTER_VALIDATE_EMAIL),
+				'unique' => TRUE
+			))
+			->validator('username', array(
+				'length' => array('minimum' => 3, 'maximum' => 32),
+				'present' => TRUE,
+				'format' => array('regex' => '/^[a-zA-Z0-9\_\-]+$/')
+			))
+			->validator('password', array(
+				'length' => array('minimum' => 5, 'maximum' => 30),
+			))
+			->validator('last_login_ip', array(
+				'format' => array('filter' => FILTER_VALIDATE_IP),
+			))
+			->validator('password', array(
+				'if' => 'validate_password',
+				'present' => TRUE,
+				'confirmed' => TRUE,
+			));
 	}
 
-	static public function _add_password_validation(Jam_Meta $meta)
-	{
-		$meta->extra_rules(array(
-			'password' => array(array('not_empty')),
-			'password_confirm' => array(
-				array('not_empty'),
-				array('min_length', array(':value', 5)),
-				array('matches', array(':validation', ':field', 'password'))
-			),
-		));
-	}
 
 	/**
 	 * Complete the login for a user by incrementing the logins and saving login timestamp

@@ -17,9 +17,7 @@ class Kohana_Model_Auth_User_Token extends Jam_Model {
 		$meta->fields(array(
 			'id' => Jam::field('primary'),
 			'user_agent' => Jam::field('string'),
-			'token' => Jam::field('string', array(
-				'unique' => TRUE,
-			)),
+			'token' => Jam::field('string'),
 			'type' => Jam::field('string'),
 			'created' => Jam::field('timestamp', array(
 				'auto_now_create' => TRUE,
@@ -30,6 +28,8 @@ class Kohana_Model_Auth_User_Token extends Jam_Model {
 		$meta->associations(array(
 			'user' => Jam::association('belongsto'),
 		));
+
+		$meta->validator('token', array("unique" => TRUE));
 	}
 
 	/**
@@ -54,6 +54,7 @@ class Kohana_Model_Auth_User_Token extends Jam_Model {
 
 		if ($this->expires < time() AND $this->loaded())
 		{
+
 			// This object has expired
 			$this->delete();
 		}

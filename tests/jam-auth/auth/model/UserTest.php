@@ -62,7 +62,7 @@ class Auth_Model_UserTest extends Unittest_Auth_TestCase {
 	public function test_save_with_expired_tokens()
 	{
 		$user = Jam::factory('test_user', 1);
-		foreach ($user->user_tokens as $i =>$token) 
+		foreach ($user->user_tokens as $i => $token) 
 		{
 			// GO through the tokens to trigger its auto delete mechanizm
 			$token->loaded();
@@ -106,28 +106,27 @@ class Auth_Model_UserTest extends Unittest_Auth_TestCase {
 		$user = Jam::factory('test_user', 1);
 		$user->set($field, $value);
 
-		$this->assertEquals($is_valid, $user->check(), "The check should return $is_valid");
+		$this->assertEquals($is_valid, $user->check(), "The check should return ".($is_valid ? 'TRUE' : 'FALSE').", errors ".print_r($user->errors()->messages(), TRUE));
 	}
 
-	public function provider_add_password_validation()
+	public function provider_validate_password()
 	{
 		return array(
 			array(array('password' => 'new-password'), FALSE),
-			array(array('password' => 'new-password', 'password_confirm' => 'old-password'), FALSE),
-			array(array('password' => 'new-password', 'password_confirm' => 'new-password'), TRUE),
+			array(array('password' => 'new-password', 'password_confirmation' => 'old-password'), FALSE),
+			array(array('password' => 'new-password', 'password_confirmation' => 'new-password'), TRUE),
 		);
 	}
 
 	/**
-	 * @dataProvider provider_add_password_validation
+	 * @dataProvider provider_validate_password
 	 */
-	public function test_add_password_validation($params, $is_valid)
+	public function test_validate_password($params, $is_valid)
 	{
-		Jam::clear_cache('test_user');
-		Jam::meta('test_user')->add_password_validation();
 		$user = Jam::factory('test_user', 1)->set($params);
+		$user->validate_password = TRUE;
 
-		$this->assertEquals($is_valid, $user->check(), "The check should return $is_valid ".print_r($user->errors(), TRUE));
+		$this->assertEquals($is_valid, $user->check(), "The check should return ".($is_valid ? 'TRUE' : 'FALSE').", errors ".print_r($user->errors()->messages(), TRUE));
 	}
 
 	public function test_generate_login_token()
