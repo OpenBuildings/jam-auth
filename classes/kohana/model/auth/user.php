@@ -44,9 +44,7 @@ class Kohana_Model_Auth_User extends Jam_Model {
 			'last_login' => Jam::field('timestamp'),
 			'facebook_uid' => Jam::field('string'),
 			'twitter_uid' => Jam::field('string'),
-			'last_login_ip' => Jam::field('string', array(
-				'label' => 'Last logged from',
-			)),
+			'last_login_ip' => Jam::field('string', array('label' => 'Last logged from')),
 		));
 
 		$meta

@@ -80,7 +80,7 @@ class Auth_Model_UserTest extends Unittest_Auth_TestCase {
 			array('email', 'new@example.com', TRUE),
 			array('email', 'example.com', FALSE),
 			array('email', 'user@example.com', FALSE),
-			array('email', NULL, FALSE),
+			array('email', ' ', FALSE),
 			array('username', 'new-user', TRUE),
 			array('username', '', FALSE),
 			array('username', 'sm', FALSE),
@@ -106,7 +106,7 @@ class Auth_Model_UserTest extends Unittest_Auth_TestCase {
 		$user = Jam::factory('test_user', 1);
 		$user->set($field, $value);
 
-		$this->assertEquals($is_valid, $user->check(), "The check should return ".($is_valid ? 'TRUE' : 'FALSE').", errors ".print_r($user->errors()->messages(), TRUE));
+		$this->assertEquals($is_valid, $user->check(), "The check should return ".($is_valid ? 'TRUE' : 'FALSE').", errors ".$user->errors());
 	}
 
 	public function provider_validate_password()
