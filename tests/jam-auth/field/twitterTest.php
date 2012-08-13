@@ -39,7 +39,7 @@ class Field_TwitterTest extends Unittest_TestCase {
 	{
 		$twitter_field = new Jam_Field_Twitter;
 		
-		$this->assertEquals($twitter_field->set(NULL, $twitter), $expected);
+		$this->assertEquals($twitter_field->set(NULL, $twitter, TRUE), $expected);
 	}
 }
 

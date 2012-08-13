@@ -20,7 +20,7 @@ class Kohana_Jam_Field_Twitter extends Jam_Field_Weblink {
 	 * @param  boolean $loaded
 	 * @return string
 	 */
-	public function attribute_set($model, $value)
+	public function attribute_set($model, $value, $is_changed)
 	{
 		if ($value AND strpos($value, 'twitter.com') === FALSE)
 		{
@@ -30,7 +30,7 @@ class Kohana_Jam_Field_Twitter extends Jam_Field_Weblink {
 			}
 			$value = 'http://twitter.com/'.$value;
 		}
-		return parent::attribute_set($model, $value);
+		return parent::attribute_set($model, $value, $is_changed);
 	}
 
 } // End Jam_Field_Twitter
