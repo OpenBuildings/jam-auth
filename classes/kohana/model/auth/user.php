@@ -67,6 +67,10 @@ class Kohana_Model_Auth_User extends Jam_Model {
 				'if' => 'validate_password',
 				'present' => TRUE,
 				'confirmed' => TRUE,
+			))
+			->validator('password_confirmation', array(
+				'if' => 'validate_password',
+				'present' => TRUE,
 			));
 	}
 
