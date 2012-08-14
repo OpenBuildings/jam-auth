@@ -112,7 +112,7 @@ class Auth_Model_UserTest extends Unittest_Auth_TestCase {
 	public function provider_validate_password()
 	{
 		return array(
-			array(array('password' => 'new-password'), FALSE),
+			array(array('password' => 'new-password', 'password_confirmation' => ''), FALSE),
 			array(array('password' => 'new-password', 'password_confirmation' => 'old-password'), FALSE),
 			array(array('password' => 'new-password', 'password_confirmation' => 'new-password'), TRUE),
 		);
@@ -126,7 +126,7 @@ class Auth_Model_UserTest extends Unittest_Auth_TestCase {
 		$user = Jam::factory('test_user', 1)->set($params);
 		$user->validate_password = TRUE;
 
-		$this->assertEquals($is_valid, $user->check(), "The check should return ".($is_valid ? 'TRUE' : 'FALSE').", errors ".print_r($user->errors()->messages(), TRUE));
+		$this->assertEquals($is_valid, $user->check(), "The check should return ".($is_valid ? 'TRUE' : 'FALSE').", errors ".$user->errors());
 	}
 
 	public function test_generate_login_token()
