@@ -65,6 +65,9 @@ In order to load all the needed information for the user from the service (You w
 
 Logging out is a bit more complicated as it requires going to each service's site to logout from there so will have to go several times through the "logout" page to do that. This is handled automatically, but if you have explicit redirects, they might not work as expected.
 
+License
+-------
 
+jamaker is Copyright © 2012 OpenBuildings Inc, developed by Ivan Kerin. It is free software, and may be redistributed under the terms specified in the LICENSE file.
 
 
