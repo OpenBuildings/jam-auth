@@ -68,6 +68,6 @@ Logging out is a bit more complicated as it requires going to each service's sit
 License
 -------
 
-jamaker is Copyright © 2012 OpenBuildings Inc, developed by Ivan Kerin. It is free software, and may be redistributed under the terms specified in the LICENSE file.
+Jam-auth is Copyright © 2012 OpenBuildings Inc, developed by Ivan Kerin. It is free software, and may be redistributed under the terms specified in the LICENSE file.
 
 
