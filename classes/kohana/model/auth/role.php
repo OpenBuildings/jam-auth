@@ -4,7 +4,7 @@
  *
  * @package	   Kohana/Auth
  * @author     Ivan Kerin
- * @copyright  (c) 2011-2012 OpenBuildings Inc.
+ * @copyright  (c) 2011-2012 Despark Ltd.
  * @author	   creatoro
  * @copyright  (c) 2011 creatoro
  * @license	   http://creativecommons.org/licenses/by-sa/3.0/legalcode

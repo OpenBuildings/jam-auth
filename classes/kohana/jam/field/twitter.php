@@ -6,7 +6,7 @@
  * @package    Jam
  * @category   Fields
  * @author     Haralan Dobrev
- * @copyright  (c) 2012 OpenBuildings Inc.
+ * @copyright  (c) 2012 Despark Ltd.
  * @license    http://www.opensource.org/licenses/isc-license.txt
  */
 class Kohana_Jam_Field_Twitter extends Jam_Field_Weblink {

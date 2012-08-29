@@ -4,7 +4,7 @@
  *
  * @package    Kohana/Auth
  * @author     Ivan Kerin
- * @copyright  (c) 2012 OpenBuildings Ltd.
+ * @copyright  (c) 2012 Despark Ltd.
  * @license    http://creativecommons.org/licenses/by-sa/3.0/legalcode
  */
 abstract class Kohana_Auth_Jam extends Auth {
