@@ -78,23 +78,28 @@ abstract class Kohana_Auth_Service {
 	}
 
 	public function get_user()
-	{
+	{		
 		if ($this->enabled() AND $this->logged_in())
 		{
 			$user = Jam::query($this->_user_model)->where($this->_service_field, '=', $this->service_uid())->find();
-
+			$user->_is_new = TRUE;
 			$data = $this->service_user_info();
-
+								
 			if ( ! $user->loaded())
-			{
+			{				
 				if (isset($data['email']))
 				{
 					$user = Jam::query($this->_user_model)->where('email', '=', $data['email'])->find();
+					
+					if ($user->loaded())
+					{
+						$user->_is_new = FALSE;
+					}
 				}	
 				
 				if ( ! $user->loaded() AND Arr::get($this->_config, 'create_user'))
 				{
-					$user = $this->build_user($data, TRUE);										
+					$user = $this->build_user($data, TRUE);
 				}
 								
 				if ( ! $user)
@@ -110,8 +115,13 @@ abstract class Kohana_Auth_Service {
 			}
 			elseif (Arr::get($this->_config, 'update_user'))
 			{
+				$user->_is_new = FALSE;				
 				$user->load_service_values($this, $data, FALSE);
 				$user->save();
+			}
+			else
+			{
+				$user->_is_new = FALSE;
 			}
 			return $user;
 		}
