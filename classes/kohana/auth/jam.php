@@ -159,7 +159,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 	public function login_with_token($token)
 	{
 		if ( ! $token)
-			throw new Kohana_Exception('Need to pass login token');
+			return NULL;
 
 		// Load the token and user
 		$token = $this->_load_token($token);
