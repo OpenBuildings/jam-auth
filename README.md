@@ -1,19 +1,19 @@
 # Jam driver for Kohana Auth
 
-This is a Kohana Auth driver, for Jam, however it adds some more functionality that is absent in Auth ORM module, namely the ability to login / logout with different services, such as twitter, facebook and google. The service infrastructure is 
-there, however only the facebook service is implemented.
+This is a Kohana Auth driver, for Jam, however it adds some more functionality that is absent in Auth ORM module, namely the ability to login / logout with different services, such as Twitter, Facebook and Google. The service infrastructure is 
+there, however only the Facebook service is implemented.
 
 ## Installation
 
 Enable the module in your **bootstrap.php**:
-
+	
+	DOCROOT/bootstrap.php
 	Kohana::modules(array(
 		'jam-auth' => MODPATH.'jam-auth',
 		// ...
 	));
 
-In your config/auth.php file:
-
+	APPPATH/config/auth.php
 	return array(
 		'driver' => 'jam'
 
@@ -38,7 +38,7 @@ In your config/auth.php file:
 		),
 	);
 
-You will need to create the database models - there are 2 sql files provided for mysql / postgre
+You will need to create the database tables - there are 2 sql files provided for mysql / postgre
 
 * auth-schema-mysql.sql 
 * auth-schema-postgresql.sql
@@ -49,17 +49,17 @@ You can execute this to create your user, role and and token tables
 
 The default Model_User has some fields set up for you:
 
-* id - primary key
-* email - string field with validation for email, unique
-* username - string field with validation for username (letters, dashes and underscores), length 3..32, required
-* password - will autohash with the hash method on save (so before the save you can retrieve the actual password when set)
-* logins - how many times the user has logged in
-* last_login - the date of the last login
-* last_login_ip - the IP from which the user performed the last login
-* facbook_uid - this is used by the facebook auth service
-* twitter_uid - this is used by the twitter auth service
+* __id__ - primary key
+* __email__ - string field with validation for email, unique
+* __username__ - string field with validation for username (letters, dashes and underscores), length 3..32, required
+* __password__ - will autohash with the hash method on save (so before the save you can retrieve the actual password when set)
+* __logins__ - how many times the user has logged in
+* __last_login__ - the date of the last login
+* __last_login_ip__ - the IP from which the user performed the last login
+* __facbook_uid__ - this is used by the facebook auth service
+* __twitter_uid__ - this is used by the twitter auth service
 
-You can use the model "as is" but you most probably will want to custumize it, so create a file Model_User in your classes/model/ folder.
+You can use the model "as is" but you most probably will want to customize it, so create a file Model_User in your APPPATH/classes/model/ folder.
 
 	APPPATH/classes/model/user.php
 	<?php defined('SYSPATH') OR die('No direct script access.');
@@ -123,9 +123,9 @@ To setup the login code you can use the ->login() method of the jam auth like th
 
 ## Auto login
 
-Autologin uses cookies to login the user automatically.
+Auto login uses cookies to login the user automatically.
 
-	// By setting the "remember me" to true, you create an auth token entry in the database with the corresponding cookie
+	// By setting the "remember me" to TRUE, you create an auth token entry in the database with the corresponding cookie
 	$user = Auth::instance()->login($username, $password, TRUE);
 
 	// Which will be used by these methods to automatically login the user if the cookie matches the db entry
@@ -133,13 +133,13 @@ Autologin uses cookies to login the user automatically.
 	Auth::instance()->get_user();
 	Auth::instance()->auto_login();
 
-Services also can be configured to be used for auto-login, for example if facebook auth service config has 'auto_login' => TRUE, then any ->auto_login() call will try to use the service to for logging in the user. Be careful with this however, as this can add high overhead to the requests of your non-logged in users.
+Services also can be configured to be used for auto-login, for example if Facebook auth service config has 'auto_login' => TRUE, then any ->auto_login() call will try to use the service to for logging in the user. Be careful with this however, as this can add high overhead to the requests of your non-logged in users.
 
 It is best to use a separate method for logging in with each service as described in the following example:
 
 ## Login with service
 
-Jam Auth also supports facebook logins, and the facebook API is included in the vendors folder. Example login with facebook code: 
+Jam Auth also supports Facebook logins, and the Facebook API is included in the vendors folder. Example login with facebook code: 
 
 	APPPATH/classes/controller/session.php
 	class Controller_Session extends Controller {
@@ -158,10 +158,10 @@ Jam Auth also supports facebook logins, and the facebook API is included in the 
 	}
 
 ->login_with_service() is similar to ->login() and returns the logged in user on successful login and FALSE on failure.
-You will have to login the user to the service yourself however. So the way this works for facebook in particular is that you perform a "login" action with javascript, and return to this URL (/session/login_facebook). And then it finds out what user is this in your own database. You can control whether to create the user automatically if its not present in the database with the 'create_user' config option.
+You will have to login the user to the service yourself however. So the way this works for Facebook in particular is that you perform a "login" action with javascript, and return to this URL (/session/login_facebook). And then it finds out what user is this in your own database. You can control whether to create the user automatically if its not present in the database with the 'create_user' config option.
 
 
-## Model Extension for facebook
+## Model Extension for Facebook
 
 In order to load all the needed information for the user from the service (You want more information about the user than just the email) you can extend the load_service_values() method of the model and have specific code to handle extracting that information. For example:
 
@@ -211,7 +211,7 @@ Forgotten password is not implemented per se, but it is very easy to set up.
 				$user = Jam::factory('user', $request->post('email'));
 				if ($user->loaded())
 				{
-					// Generate a spectial onetime token, that will expire in a week
+					// Generate a special onetime token, that will expire in a week
 					$token = $user->generate_login_token();
 					mail($user->email, 'Forgotten Password', 'Click this link to login: '.URL::site(TRUE).'/session/login_token/'.$token->token);
 					$view->set('message', 'An email with instructions has been sent to '.$user->email);
@@ -225,7 +225,7 @@ Forgotten password is not implemented per se, but it is very easy to set up.
 			$this->response->body($view);
 		}
 
-		funciton action_login_token()
+		function action_login_token()
 		{
 			// Perform the actual login - if the login is successful - return the user, otherwise return FALSE
 			if ($user = $this->auth->login_with_token($this->request->param('id')))
