@@ -73,6 +73,11 @@ abstract class Kohana_Auth_Jam extends Auth {
 		return FALSE;
 	}
 
+	/**
+	 * Getter
+	 * The session instance for the configured session_type
+	 * @return Session 
+	 */
 	public function session()
 	{
 		if ( ! $this->_session)
@@ -118,6 +123,11 @@ abstract class Kohana_Auth_Jam extends Auth {
 		return FALSE;
 	}
 
+	/**
+	 * Create autologin token
+	 * @param  Model_User $user 
+	 * @return Model_User_Token
+	 */
 	public function remember($user)
 	{
 		// Create a new autologin token
@@ -156,6 +166,11 @@ abstract class Kohana_Auth_Jam extends Auth {
 		return $this->complete_login($user);
 	}
 
+	/**
+	 * login using a spesific token
+	 * @param  string $token token hash
+	 * @return Model_User|NULL
+	 */
 	public function login_with_token($token)
 	{
 		if ( ! $token)
@@ -186,6 +201,12 @@ abstract class Kohana_Auth_Jam extends Auth {
 		}
 	}
 
+	/**
+	 * Attempt to login the user using specific service
+	 * @param  string  $name     the name of the service
+	 * @param  boolean $remember create autologin token
+	 * @return Model_User|NULL
+	 */
 	public function login_with_service($name, $remember = FALSE)
 	{
 		if ($user = $this->services($name)->login())
@@ -261,7 +282,9 @@ abstract class Kohana_Auth_Jam extends Auth {
 	}
 
 	/**
-	 * The cookie code is in this method so it can be tested separately
+	 * Getter / Setter of the autologin cookie
+	 * Extend this method in your tests so you can remove dependance on cookies there
+	 * 
 	 * @param  string $token   
 	 * @param  integer $expires days lifetime
 	 * @return mixed
@@ -284,7 +307,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 	}
 
 	/**
-	 * Log a user out and remove any autologin cookies.
+	 * Log a user out and remove any autologin cookies, and goes to each service to log out the user there
 	 *
 	 * @param   boolean  $destroy     completely destroy the session
 	 * @param	boolean  $logout_all  remove all tokens for user
