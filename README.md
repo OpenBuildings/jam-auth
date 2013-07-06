@@ -148,7 +148,7 @@ Jam Auth also supports Facebook logins, and the Facebook API is included in the 
 		{
 			if ($user = $this->auth->login_with_service('facebook'))
 			{
-				$this->request->redirect(URL::site());
+				$this->redirect(URL::site());
 			}
 			else
 			{
@@ -208,7 +208,7 @@ Forgotten password is not implemented per se, but it is very easy to set up.
 
 			if ($request->method() === Request::POST)
 			{
-				$user = Jam::factory('user', $request->post('email'));
+				$user = Jam::find('user', $request->post('email'));
 				if ($user->loaded())
 				{
 					// Generate a special onetime token, that will expire in a week
@@ -230,7 +230,7 @@ Forgotten password is not implemented per se, but it is very easy to set up.
 			// Perform the actual login - if the login is successful - return the user, otherwise return FALSE
 			if ($user = $this->auth->login_with_token($this->request->param('id')))
 			{
-				$this->request->redirect(URL::site());
+				$this->redirect(URL::site());
 			}
 			else
 			{
@@ -249,7 +249,7 @@ Logging out is a bit more complicated as it requires going to each service's sit
 		function action_destroy()
 		{
 			$this->auth->logout();
-			$this->request->redirect(URL::site());
+			$this->redirect(URL::site());
 		}
 	}
 
