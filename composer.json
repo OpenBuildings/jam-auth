@@ -1,8 +1,8 @@
 {
-	"name": "openbuildings/jam",
+	"name": "openbuildings/jam-auth",
 	"type": "kohana-module",
-	"description": "Small but feature rich ORM, has extensible models and builders, baked in upload functionality, supporting multiple backends (rackspace, ftp), polymorphic associations, form builders, nested forms, validators",
-	"keywords": ["kohana", "database", "ORM", "upload", "form builder", "validation"],
+	"description": "This is a Kohana Auth driver, for Jam",
+	"keywords": ["kohana", "auth", "jam", "facebook", "login", "authentication"],
 	"homepage": "https://github.com/OpenBuildings/jam-auth",
 	"license": "BSD-3-Clause",
 	"authors": [
