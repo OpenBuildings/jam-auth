@@ -17,7 +17,6 @@ abstract class Kohana_Auth_Service_Facebook extends Auth_Service {
 
 	public function initialize()
 	{
-		require_once Kohana::find_file('vendor/facebook-sdk', 'facebook');
 		return new Facebook(Arr::get($this->_config, 'auth'));
 	}
 
@@ -35,16 +34,14 @@ abstract class Kohana_Auth_Service_Facebook extends Auth_Service {
 
 	public function logout_service($request, $back_url)
 	{
-		if ($request->query(self::LOGOUT_PARAMETER))
+		if ($request->query(Auth_Service_Facebook::LOGOUT_PARAMETER))
 		{
-			setcookie('fbs_'.$this->api()->getAppId(), '', time()-100, '/', '.'.parse_url(URL::base(TRUE), PHP_URL_HOST));
 			$this->api()->destroySession();
-			session_destroy();
 			return TRUE;
 		}
 		else
 		{
-			$back_url .= (strpos($back_url, '?') === FALSE ? '?' : '&').self::LOGOUT_PARAMETER.'=1';
+			$back_url .= (strpos($back_url, '?') === FALSE ? '?' : '&').Auth_Service_Facebook::LOGOUT_PARAMETER.'=1';
 
 			HTTP::redirect($this->api()->getLogoutUrl(array(
 				'next' => $back_url
