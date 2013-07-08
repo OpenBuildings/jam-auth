@@ -7,7 +7,7 @@
  * @group   jam-auth
  * @group   jam-auth.jam
  */
-class Auth_JamTest extends Testcase_Functest_Auth {
+class Auth_JamTest extends Testcase_Auth {
 
 	public function test_services_loaded()
 	{

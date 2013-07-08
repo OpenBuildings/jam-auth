@@ -4,7 +4,7 @@ class Model_Test_User_Token extends Model_Auth_User_Token {
 
 	static public function initialize(Jam_Meta $meta)
 	{
-		$meta->db(Functest_Fixture_Database::instance()->db_name());
+		$meta->db(Kohana::TESTING);
 
 		parent::initialize($meta);
 		
