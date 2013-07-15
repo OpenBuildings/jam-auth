@@ -348,7 +348,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 			// Clear the autologin token from the database
 			$token = $this->_load_token($token);
 
-			if ($token AND $token->loaded())
+			if ($token AND $token->loaded() AND $token->user)
 			{
 				if ($logout_all)
 				{
