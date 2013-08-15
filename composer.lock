@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "d22485d4ea055a519e759afe03c1be64",
+    "hash": "55edfe7707987b6fa2253c7fa441dfd8",
     "packages": [
         {
             "name": "composer/installers",
@@ -160,16 +160,16 @@
         },
         {
             "name": "openbuildings/jam",
-            "version": "0.3.6",
+            "version": "0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenBuildings/jam.git",
-                "reference": "0.3.6"
+                "reference": "0.4.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenBuildings/jam/zipball/0.3.6",
-                "reference": "0.3.6",
+                "url": "https://api.github.com/repos/OpenBuildings/jam/zipball/0.4.0",
+                "reference": "0.4.0",
                 "shasum": ""
             },
             "require": {
@@ -203,7 +203,7 @@
                 "upload",
                 "validation"
             ],
-            "time": "2013-08-14 08:47:27"
+            "time": "2013-08-15 09:45:51"
         },
         {
             "name": "rackspace/php-opencloud",
