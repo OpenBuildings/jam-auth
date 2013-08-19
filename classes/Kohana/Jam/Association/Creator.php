@@ -31,7 +31,7 @@ class Kohana_Jam_Association_Creator extends Jam_Association_Belongsto {
 		
 		if ($this->required)
 		{
-			$meta->validator('creator', array('present' => TRUE));
+			$meta->validator($name, array('present' => TRUE));
 		}
 	}
 
