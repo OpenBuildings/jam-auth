@@ -133,7 +133,7 @@ abstract class Kohana_Auth_Service {
 		if ( ! $this->enabled())
 			return FALSE;
 
-		return $this->logout_service(Request::initial(), URL::site(Request::current()->url(), TRUE));
+		return $this->logout_service(Request::initial(), URL::site(Request::current()->uri(), TRUE));
 	}
 
 	public function login()
