@@ -133,7 +133,7 @@ abstract class Kohana_Auth_Service {
 		if ( ! $this->enabled())
 			return FALSE;
 
-		return $this->logout_service(Request::initial(), URL::site(Request::current()->uri(), TRUE));
+		return $this->logout_service(URL::site(Request::current()->uri(), TRUE));
 	}
 
 	public function login()
@@ -147,7 +147,7 @@ abstract class Kohana_Auth_Service {
 		}
 		else
 		{
-			$login_url = $this->login_url(URL::site(Arr::get($this->_config, 'back_url', Request::current()->url())), TRUE);
+			$login_url = $this->login_url(URL::site(Arr::get($this->_config, 'back_url', Request::current()->uri()), TRUE));
 
 			HTTP::redirect($login_url);
 			return FALSE;
@@ -160,7 +160,7 @@ abstract class Kohana_Auth_Service {
 
 	abstract public function login_url($back_url);
 	
-	abstract public function logout_service($request, $back_url);
+	abstract public function logout_service($back_url);
 
 	abstract public function service_user_info();
 

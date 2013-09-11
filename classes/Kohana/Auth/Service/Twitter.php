@@ -25,7 +25,7 @@ abstract class Kohana_Auth_Service_Twitter extends Auth_Service {
 	{
 	}
 
-	public function logout_service($request, $back_url)
+	public function logout_service($back_url)
 	{
 	}
 

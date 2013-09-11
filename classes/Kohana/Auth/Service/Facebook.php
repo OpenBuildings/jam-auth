@@ -9,8 +9,6 @@
  */
 abstract class Kohana_Auth_Service_Facebook extends Auth_Service {
 
-	const LOGOUT_PARAMETER = '_facebook_logged_out';
-	
 	protected $_service_field = 'facebook_uid';
 
 	protected $_type = 'facebook';
@@ -28,26 +26,15 @@ abstract class Kohana_Auth_Service_Facebook extends Auth_Service {
 	public function login_url($back_url)
 	{
 		return $this->api()->getLoginUrl(array(
-			'next' => $back_url
+			'redirect_uri' => $back_url,
 		));
 	}
 
-	public function logout_service($request, $back_url)
+	public function logout_service($back_url)
 	{
-		if ($request->query(Auth_Service_Facebook::LOGOUT_PARAMETER))
-		{
-			$this->api()->destroySession();
-			return TRUE;
-		}
-		else
-		{
-			$back_url .= (strpos($back_url, '?') === FALSE ? '?' : '&').Auth_Service_Facebook::LOGOUT_PARAMETER.'=1';
-
-			HTTP::redirect($this->api()->getLogoutUrl(array(
-				'next' => $back_url
-			)));
-			return FALSE;
-		}
+		HTTP::redirect($this->api()->getLogoutUrl(array(
+			'redirect_uri' => $back_url
+		)));
 	}
 
 	public function service_user_info()
@@ -56,12 +43,8 @@ abstract class Kohana_Auth_Service_Facebook extends Auth_Service {
 		{
 			return $this->api()->api('/me');
 		} 
-		catch (FacebookApiException $exception) 
-		{
-			return NULL;			
-		}
+		catch (FacebookApiException $exception) {}
 	}
-
 
 	public function service_uid()
 	{
