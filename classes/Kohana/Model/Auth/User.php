@@ -55,6 +55,7 @@ class Kohana_Model_Auth_User extends Jam_Model {
 			))
 			->validator('password', array(
 				'length' => array('minimum' => 5, 'maximum' => 30),
+				'if' => 'validate_password',
 			))
 			->validator('last_login_ip', array(
 				'format' => array('filter' => FILTER_VALIDATE_IP),
