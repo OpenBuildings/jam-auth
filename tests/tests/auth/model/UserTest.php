@@ -73,7 +73,6 @@ class Auth_Model_UserTest extends PHPUnit_Framework_TestCase {
 			array('username', 'sm', FALSE),
 			array('username', 'hh345 345 -34', FALSE),
 			array('username', 'very_long_userna_very_long_userna_', FALSE),
-			array('password', 'sm', FALSE),
 			array('password', 'new-password', TRUE),
 			array('last_login_ip', '34802', FALSE),
 			array('last_login_ip', '10.10.10', FALSE),
