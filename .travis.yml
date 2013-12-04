@@ -4,15 +4,20 @@ language: php
 php:
   - 5.3
 
+notifications:
+  campfire:
+    rooms:
+      secure: MIlpzpcbAD3WDi2eMy3vk7cNbMkzJUtQntyYwjVurP2Dj/BMnoT6v2fOoHMUR5QxeOnxkJxZxYIk3rDpRNNTNXTNdt4WYO1T2PevZ2FD5qJ/HoV+6rTPfNhNZnUtO10t+2XR7407bhGyP6mIqtZpcYPCbyK6yV5XJhmGkmv373c=
+
 script:
   - phpunit --coverage-clover build/logs/clover.xml
 
 before_script:
   - mkdir -p build/logs
-  - composer require satooshi/php-coveralls:0.6.*
   - composer install --dev
   - mysql -e 'create database `test-jam-auth`;'
   - mysql test-jam-auth < tests/database/structure/mysql.sql
 
 after_script:
-  - php vendor/bin/coveralls -v
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml

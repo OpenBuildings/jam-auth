@@ -1,5 +1,10 @@
 # Jam driver for Kohana Auth
 
+[![Build Status](https://travis-ci.org/OpenBuildings/jam-auth.png?branch=master)](https://travis-ci.org/OpenBuildings/jam-auth)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/OpenBuildings/jam-auth/badges/quality-score.png?s=68a5ca77373bb9a3d22606d669dde6ebbf30dd34)](https://scrutinizer-ci.com/g/OpenBuildings/jam-auth/)
+[![Code Coverage](https://scrutinizer-ci.com/g/OpenBuildings/jam-auth/badges/coverage.png?s=ad67efde8a55430c4ee7466683a55711a15825c8)](https://scrutinizer-ci.com/g/OpenBuildings/jam-auth/)
+[![Latest Stable Version](https://poser.pugx.org/openbuildings/jam-auth/v/stable.png)](https://packagist.org/packages/openbuildings/jam-auth)
+
 This is a Kohana Auth driver, for Jam, however it adds some more functionality that is absent in Auth ORM module, namely the ability to login / logout with different services, such as Twitter, Facebook and Google. The service infrastructure is 
 there, however only the Facebook service is implemented.
 
