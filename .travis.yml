@@ -1,13 +1,13 @@
---- 
+---
 language: php
 
 php:
   - 5.3
 
 notifications:
-  campfire:
-    rooms:
-      secure: MIlpzpcbAD3WDi2eMy3vk7cNbMkzJUtQntyYwjVurP2Dj/BMnoT6v2fOoHMUR5QxeOnxkJxZxYIk3rDpRNNTNXTNdt4WYO1T2PevZ2FD5qJ/HoV+6rTPfNhNZnUtO10t+2XR7407bhGyP6mIqtZpcYPCbyK6yV5XJhmGkmv373c=
+  email: false
+  slack:
+    secure: U9WociTUzfzCZIWpYUyf2W4Jc+Ek4DBC0Dm7v+jr9zDTwevyRsglKerrkfgaCgDPP18Ma+j2ANEyPf25HRReJdOmSi02H5PTtcT2DnXUanr8REklrznbXADwayEjN32vArywqRrUq94GioDY3bKXgWve61wt/4YsQMTwZjL09AQ=
 
 script:
   - phpunit --coverage-clover build/logs/clover.xml
