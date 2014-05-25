@@ -104,7 +104,7 @@ abstract class Kohana_Auth_Service {
 								
 				if ( ! $user)
 				{					
-					throw new Auth_Exception_Service('Service :service user with service uid :id does not exist and faild to create', array(
+					throw new Auth_Exception_Service('Service :service user with service uid :id does not exist and failed to create', array(
 						':service' => $this->type(),
 						':id' => $this->service_uid()
 					));
