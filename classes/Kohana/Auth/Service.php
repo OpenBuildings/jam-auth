@@ -100,6 +100,7 @@ abstract class Kohana_Auth_Service {
 				if ( ! $user->loaded() AND Arr::get($this->_config, 'create_user'))
 				{
 					$user = $this->build_user($data, TRUE);
+					$user->_is_new = TRUE;
 				}
 								
 				if ( ! $user)
