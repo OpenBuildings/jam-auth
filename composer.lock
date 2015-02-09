@@ -4,28 +4,29 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f9ad5e3592864190bb57254602268e14",
+    "hash": "ff63670e4d200a614551f9bfbbb643e6",
     "packages": [
         {
             "name": "composer/installers",
-            "version": "v1.0.5",
+            "version": "v1.0.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "5bad5563431576e1b318c7326c0e61c6567000bd"
+                "reference": "1bff8aa77a18f3616f468ed8000cf86a5725bac3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/5bad5563431576e1b318c7326c0e61c6567000bd",
-                "reference": "5bad5563431576e1b318c7326c0e61c6567000bd",
+                "url": "https://api.github.com/repos/composer/installers/zipball/1bff8aa77a18f3616f468ed8000cf86a5725bac3",
+                "reference": "1bff8aa77a18f3616f468ed8000cf86a5725bac3",
                 "shasum": ""
             },
             "replace": {
+                "roundcube/plugin-installer": "*",
                 "shama/baton": "*"
             },
             "require-dev": {
                 "composer/composer": "1.0.*@dev",
-                "phpunit/phpunit": "3.7.*"
+                "phpunit/phpunit": "4.1.*"
             },
             "type": "composer-installer",
             "extra": {
@@ -47,36 +48,57 @@
                 {
                     "name": "Kyle Robinson Young",
                     "email": "kyle@dontkry.com",
-                    "homepage": "https://github.com/shama",
-                    "role": "Developer"
+                    "homepage": "https://github.com/shama"
                 }
             ],
             "description": "A multi-framework Composer library installer",
             "homepage": "http://composer.github.com/installers/",
             "keywords": [
-                "TYPO3 Flow",
-                "TYPO3 Neos",
+                "Craft",
+                "Dolibarr",
+                "Hurad",
+                "MODX Evo",
+                "OXID",
+                "SMF",
+                "Thelia",
+                "WolfCMS",
                 "agl",
+                "annotatecms",
+                "bitrix",
                 "cakephp",
+                "chef",
                 "codeigniter",
+                "concrete5",
+                "croogo",
+                "dokuwiki",
                 "drupal",
+                "elgg",
                 "fuelphp",
+                "grav",
                 "installer",
                 "joomla",
                 "kohana",
                 "laravel",
-                "li3",
                 "lithium",
+                "magento",
                 "mako",
+                "mediawiki",
                 "modulework",
+                "moodle",
                 "phpbb",
+                "piwik",
                 "ppi",
+                "puppet",
+                "roundcube",
+                "shopware",
                 "silverstripe",
                 "symfony",
+                "typo3",
                 "wordpress",
-                "zend"
+                "zend",
+                "zikula"
             ],
-            "time": "2013-08-07 17:25:08"
+            "time": "2015-01-11 03:51:11"
         },
         {
             "name": "openbuildings/flex-storage",
@@ -118,16 +140,16 @@
         },
         {
             "name": "openbuildings/jam",
-            "version": "0.4.0",
+            "version": "0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenBuildings/jam.git",
-                "reference": "b43b705bab91753db758643479a466f28e22be15"
+                "reference": "6dba32cc578cf58d22dfd9916ac33ae794194021"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenBuildings/jam/zipball/b43b705bab91753db758643479a466f28e22be15",
-                "reference": "b43b705bab91753db758643479a466f28e22be15",
+                "url": "https://api.github.com/repos/OpenBuildings/jam/zipball/6dba32cc578cf58d22dfd9916ac33ae794194021",
+                "reference": "6dba32cc578cf58d22dfd9916ac33ae794194021",
                 "shasum": ""
             },
             "require": {
@@ -136,7 +158,14 @@
                 "php": ">=5.3.0"
             },
             "require-dev": {
-                "openbuildings/kohana-test-bootsrap": "0.1.*"
+                "openbuildings/kohana-test-bootsrap": "0.1.*",
+                "phpunit/phpunit-dom-assertions": "1.0.*@dev"
+            },
+            "suggest": {
+                "openbuildings/jam-auth": "A Kohana Auth implementation for Jam, with services",
+                "openbuildings/jam-closuretable": "Closuretable implementation for Jam ORM",
+                "openbuildings/jam-monetary": "Convert and format currencies and amounts with a Jam field",
+                "openbuildings/jam-tart": "Jam admin builder"
             },
             "type": "kohana-module",
             "notification-url": "https://packagist.org/downloads/",
@@ -147,7 +176,6 @@
                 {
                     "name": "Ivan Kerin",
                     "email": "ivan@openbuildings.com",
-                    "homepage": "https://github.com/OpenBuildings/jam",
                     "role": "Author"
                 }
             ],
@@ -161,7 +189,7 @@
                 "upload",
                 "validation"
             ],
-            "time": "2013-08-15 09:45:51"
+            "time": "2015-02-09 14:58:09"
         },
         {
             "name": "rackspace/php-opencloud",
@@ -260,16 +288,16 @@
         },
         {
             "name": "openbuildings/kohana-test-bootsrap",
-            "version": "0.1.0",
+            "version": "0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenBuildings/kohana-test-bootstrap.git",
-                "reference": "00f1f6dad4a755662c5c77b3739d248614bab15d"
+                "reference": "57c9cae9bd97edbe58d1c41c35c499c7d54f4030"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenBuildings/kohana-test-bootstrap/zipball/00f1f6dad4a755662c5c77b3739d248614bab15d",
-                "reference": "00f1f6dad4a755662c5c77b3739d248614bab15d",
+                "url": "https://api.github.com/repos/OpenBuildings/kohana-test-bootstrap/zipball/57c9cae9bd97edbe58d1c41c35c499c7d54f4030",
+                "reference": "57c9cae9bd97edbe58d1c41c35c499c7d54f4030",
                 "shasum": ""
             },
             "type": "library",
@@ -291,13 +319,14 @@
                 }
             ],
             "description": "Kohana core classes repackaged with composer, used to test modules",
-            "time": "2013-08-12 09:28:25"
+            "time": "2013-10-01 08:57:54"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": [],
     "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": {
         "php": ">=5.3.0"
     },
