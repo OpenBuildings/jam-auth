@@ -38,7 +38,6 @@ class Auth_JamTest extends Testcase_Auth {
 
 		return array(
 			array(array(NULL, 'qweqwe'), TRUE),
-			array(array('username', 'qweqwe'), TRUE),
 			array(array('email', 'qweqwe'), TRUE),
 			array(array(NULL, 'qweqwe2'), FALSE),
 			array(array('username', 'qweqwe2'), FALSE),

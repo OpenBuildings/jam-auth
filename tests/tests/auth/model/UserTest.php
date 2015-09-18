@@ -18,12 +18,12 @@ class Auth_Model_UserTest extends PHPUnit_Framework_TestCase {
 		return array(
 			array(1, 'id'),
 			array(NULL, 'id'),
-			array('admin', 'username'),
-			array('user', 'username'),
-			array('login21', 'username'),
+			array('admin', 'email'),
+			array('user', 'email'),
+			array('login21', 'email'),
 			array('admin@example.com', 'email'),
 			array('user@example.com', 'email'),
-			array('user@example23', 'username'),
+			array('user@example23', 'email'),
 		);
 	}
 

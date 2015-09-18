@@ -41,6 +41,5 @@ CREATE TABLE `test_users` (
   `twitter_uid` varchar(100),
   `last_login_ip` VARCHAR(40),
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `uniq_username` (`username`),
   UNIQUE KEY `uniq_email` (`email`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
