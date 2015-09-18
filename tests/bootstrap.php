@@ -24,8 +24,9 @@ spl_autoload_register('test_autoload');
 Kohana::$config
 	->load('database')
 		->set(Kohana::TESTING, array(
-			'type'       => 'MySQL',
+			'type'       => 'PDO',
 			'connection' => array(
+				'dsn'        => 'mysql:host=localhost;charset=utf8;dbname=test-jam-auth',
 				'hostname'   => 'localhost',
 				'database'   => 'test-jam-auth',
 				'username'   => 'root',
@@ -33,6 +34,7 @@ Kohana::$config
 				'persistent' => TRUE,
 			),
 			'table_prefix' => '',
+			'identifier'   => '`',
 			'charset'      => 'utf8',
 			'caching'      => FALSE,
 		));
@@ -54,8 +56,11 @@ Kohana::$config
 		));
 
 Kohana::$environment = Kohana::TESTING;
-foreach (Database::instance(Kohana::TESTING)->list_tables() as $table)
+
+foreach (Database::instance(Kohana::TESTING)->query(Database::SELECT, 'SHOW TABLES') as $table)
 {
+	$table = $table['Tables_in_test-jam-auth'];
+
 	Database::instance(Kohana::TESTING)->query(NULL, "TRUNCATE `{$table}`");
 }
 require_once __DIR__.'/database/fixtures/data.php';
