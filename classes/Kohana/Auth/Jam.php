@@ -215,7 +215,6 @@ abstract class Kohana_Auth_Jam extends Auth {
 	/**
 	 * Attempt to login the user using specific service
 	 * @param  string  $name     the name of the service
-	 * @param  boolean $remember create autologin token
 	 * @return Model_User|NULL
 	 */
 	public function login_with_service($name)
@@ -243,7 +242,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 			return $user;
 		}
 
-		return FALSE;
+		return NULL;
 	}
 
 	/**
