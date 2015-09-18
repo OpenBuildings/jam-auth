@@ -151,7 +151,12 @@ Jam Auth also supports Facebook logins, and the Facebook API is included in the 
 
 		function action_login_facebook()
 		{
-			if ($user = $this->auth->login_with_service('facebook'))
+			$this->auth->login_with_service('facebook');
+		}
+
+		function action_complete_login_facebook()
+		{
+			if ($user = $this->auth->complete_login_with_service('facebook'))
 			{
 				$this->redirect(URL::site());
 			}
@@ -162,7 +167,8 @@ Jam Auth also supports Facebook logins, and the Facebook API is included in the 
 		}
 	}
 
-->login_with_service() is similar to ->login() and returns the logged in user on successful login and FALSE on failure.
+->login_with_service() redirect you to the "login" url of facebook.
+->complete_login_with_service() is similar to ->login() and returns the logged in user on successful login and FALSE on failure.
 You will have to login the user to the service yourself however. So the way this works for Facebook in particular is that you perform a "login" action with javascript, and return to this URL (/session/login_facebook). And then it finds out what user is this in your own database. You can control whether to create the user automatically if its not present in the database with the 'create_user' config option.
 
 
