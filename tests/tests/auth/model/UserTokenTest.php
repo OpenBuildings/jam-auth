@@ -30,7 +30,7 @@ class Auth_Model_UserTokenTest extends PHPUnit_Framework_TestCase {
 
 	public function test_expires()
 	{
-		$tomorrow = time('tomorrow');
+		$tomorrow = strtotime('tomorrow');
 		$token = Jam::build('test_user_token', array('expires' => '+2 months'));
 
 		$this->assertGreaterThan($tomorrow, $token->expires);
