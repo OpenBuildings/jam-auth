@@ -26,9 +26,9 @@ class Auth_Model_UserTest extends PHPUnit_Framework_TestCase {
 			array('user@example23', 'username'),
 		);
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @dataProvider  provider_unique_key
 	 */
 	public function test_unique_key($value, $expected_attribute)
@@ -83,9 +83,9 @@ class Auth_Model_UserTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * Test various validation conditions
 	 * @dataProvider provider_validation
-	 * @param  Model_Test_User  $user     
-	 * @param  boolean $is_valid 
-	 * @return NULL            
+	 * @param  Model_Test_User  $user
+	 * @param  boolean $is_valid
+	 * @return NULL
 	 */
 	public function test_validation($field, $value, $is_valid)
 	{

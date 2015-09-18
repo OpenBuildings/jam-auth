@@ -30,16 +30,16 @@ class Field_TwitterTest extends PHPUnit_Framework_TestCase {
 			array('', ''),
 		);
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @dataProvider  provider_twitter
 	 */
 	public function test_twitter_set($twitter, $expected)
 	{
 		$twitter_field = new Jam_Field_Twitter;
 		$user = Jam::build('test_user');
-		
+
 		$this->assertEquals($twitter_field->set($user, $twitter, TRUE), $expected);
 	}
 }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $role_login = Jam::create('test_role', array(
 	'name' => 'login',

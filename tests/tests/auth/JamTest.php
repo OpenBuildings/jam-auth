@@ -11,7 +11,7 @@ class Auth_JamTest extends Testcase_Auth {
 
 	public function test_services_loaded()
 	{
-		$this->assertCount(1, $this->auth->services(), 'Should load one service (facebook)');	
+		$this->assertCount(1, $this->auth->services(), 'Should load one service (facebook)');
 		$this->assertArrayHasKey('facebook', $this->auth->services(), 'Should load the facebook service');
 		$this->assertInstanceOf('Auth_Service_Facebook', $this->auth->services('facebook'), 'Should load the facebook service class');
 	}
@@ -20,7 +20,7 @@ class Auth_JamTest extends Testcase_Auth {
 	{
 		$user = Jam::find('test_user', 1);
 		$this->auth->force_login($user);
-		
+
 		$this->assertTrue($this->auth->logged_in(), 'should be logged in after complete login');
 	}
 
@@ -60,7 +60,7 @@ class Auth_JamTest extends Testcase_Auth {
 		{
 			$login_args[0] = $user;
 		}
-		
+
 		call_user_func_array(array($this->auth, 'login'), $login_args);
 
 		$this->assertEquals($should_be_logged_in, $this->auth->logged_in());
@@ -76,7 +76,7 @@ class Auth_JamTest extends Testcase_Auth {
 		$token = $this->auth->remember($user);
 
 		$jam_token = Jam::all('test_user_token')->valid_token($token->token)->first();
-		
+
 		$this->assertNotNull($jam_token);
 
 		$this->auth->login_with_token($token);
@@ -194,7 +194,7 @@ class Auth_JamTest extends Testcase_Auth {
 			array(array('public', 'except' => 'create', 'only' => array('edit', 'index')), 'index', 'public'),
 		);
 	}
-	
+
 	/**
 	 * @dataProvider data_access
 	 */
@@ -202,6 +202,6 @@ class Auth_JamTest extends Testcase_Auth {
 	{
 		$this->assertEquals($expected_access, Auth_Jam::access($action, $access));
 	}
-	
+
 }
 

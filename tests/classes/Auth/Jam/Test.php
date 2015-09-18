@@ -24,7 +24,7 @@ class Auth_Jam_Test extends Kohana_Auth_Jam {
 		{
 			unset($_COOKIE['authautologin']);
 		}
-		elseif ($token !== NULL) 
+		elseif ($token !== NULL)
 		{
 			$_COOKIE['authautologin'] = $token;
 		}

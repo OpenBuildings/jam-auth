@@ -79,7 +79,4 @@ class Auth_Jam_ServiceTest extends Testcase_Auth {
 		$this->assertEquals(1, $user->id());
 		$this->assertEquals('facebook-test', $user->facebook_uid);
 	}
-
-
 }
-

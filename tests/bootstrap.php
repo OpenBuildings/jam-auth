@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require_once __DIR__.'/../vendor/autoload.php';
 
@@ -54,7 +54,7 @@ Kohana::$config
 		));
 
 Kohana::$environment = Kohana::TESTING;
-foreach (Database::instance(Kohana::TESTING)->list_tables() as $table) 
+foreach (Database::instance(Kohana::TESTING)->list_tables() as $table)
 {
 	Database::instance(Kohana::TESTING)->query(NULL, "TRUNCATE `{$table}`");
 }

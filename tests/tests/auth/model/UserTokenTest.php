@@ -10,7 +10,6 @@
  */
 class Auth_Model_UserTokenTest extends PHPUnit_Framework_TestCase {
 
-	
 	public function test_find_by_token()
 	{
 		$current_time = time();
@@ -36,6 +35,4 @@ class Auth_Model_UserTokenTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertGreaterThan($tomorrow, $token->expires);
 	}
-
 }
-

@@ -5,13 +5,13 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/OpenBuildings/jam-auth/badges/coverage.png?s=ad67efde8a55430c4ee7466683a55711a15825c8)](https://scrutinizer-ci.com/g/OpenBuildings/jam-auth/)
 [![Latest Stable Version](https://poser.pugx.org/openbuildings/jam-auth/v/stable.png)](https://packagist.org/packages/openbuildings/jam-auth)
 
-This is a Kohana Auth driver, for Jam, however it adds some more functionality that is absent in Auth ORM module, namely the ability to login / logout with different services, such as Twitter, Facebook and Google. The service infrastructure is 
+This is a Kohana Auth driver, for Jam, however it adds some more functionality that is absent in Auth ORM module, namely the ability to login / logout with different services, such as Twitter, Facebook and Google. The service infrastructure is
 there, however only the Facebook service is implemented.
 
 ## Installation
 
 Enable the module in your **bootstrap.php**:
-	
+
 	DOCROOT/bootstrap.php
 	Kohana::modules(array(
 		'jam-auth' => MODPATH.'jam-auth',
@@ -38,14 +38,14 @@ Enable the module in your **bootstrap.php**:
 				'auth' => array(
 					'appId' => '224919274252280',
 					'secret' => '4c891b816f1273442bdd7e1bac33f7e3'
-				), 
+				),
 			),
 		),
 	);
 
 You will need to create the database tables - there are 2 sql files provided for mysql / postgre
 
-* auth-schema-mysql.sql 
+* auth-schema-mysql.sql
 * auth-schema-postgresql.sql
 
 You can execute this to create your user, role and and token tables
@@ -144,7 +144,7 @@ It is best to use a separate method for logging in with each service as describe
 
 ## Login with service
 
-Jam Auth also supports Facebook logins, and the Facebook API is included in the vendors folder. Example login with facebook code: 
+Jam Auth also supports Facebook logins, and the Facebook API is included in the vendors folder. Example login with facebook code:
 
 	APPPATH/classes/controller/session.php
 	class Controller_Session extends Controller {
@@ -175,7 +175,7 @@ In order to load all the needed information for the user from the service (You w
 		if ($service->name == 'facebook')
 		{
 			$email = Arr::get($user_data, 'email');
-			
+
 			$this->set(array_filter(array(
 				'facebook_uid' => $user_data['id'],
 				'username'     => URL::title(Arr::get($user_data, 'username', $user_data['name']), '-', TRUE),
@@ -192,7 +192,7 @@ In order to load all the needed information for the user from the service (You w
 
 ## Forgotten password
 
-Forgotten password is not implemented per se, but it is very easy to set up. 
+Forgotten password is not implemented per se, but it is very easy to set up.
 
 	APPPATH/views/session/forgotten.php
 	<?php if (isset($message)): ?>
