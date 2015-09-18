@@ -21,9 +21,9 @@ abstract class Kohana_Auth_Service {
 
 	protected $_login_role;
 
-	protected $_user_model = 'user';	
+	protected $_user_model = 'user';
 
-	protected $_role_model = 'role';	
+	protected $_role_model = 'role';
 
 	public function api($api = NULL)
 	{
@@ -78,45 +78,45 @@ abstract class Kohana_Auth_Service {
 	}
 
 	public function get_user()
-	{		
+	{
 		if ($this->enabled() AND $this->logged_in())
 		{
 			$user = Jam::find_or_build($this->_user_model, array($this->_service_field => $this->service_uid()));
 			$user->_is_new = TRUE;
 			$data = $this->service_user_info();
-								
+
 			if ( ! $user->loaded())
-			{				
+			{
 				if (isset($data['email']))
 				{
 					$user = Jam::find_or_build($this->_user_model, array('email' => $data['email']));
-					
+
 					if ($user->loaded())
 					{
 						$user->_is_new = FALSE;
 					}
-				}	
-				
+				}
+
 				if ( ! $user->loaded() AND Arr::get($this->_config, 'create_user'))
 				{
 					$user = $this->build_user($data, TRUE);
 					$user->_is_new = TRUE;
 				}
-								
+
 				if ( ! $user)
-				{					
+				{
 					throw new Auth_Exception_Service('Service :service user with service uid :id does not exist and failed to create', array(
 						':service' => $this->type(),
 						':id' => $this->service_uid()
 					));
 				}
-								
+
 				$user->set($this->_service_field, $this->service_uid());
 				$user->save();
 			}
 			elseif (Arr::get($this->_config, 'update_user'))
 			{
-				$user->_is_new = FALSE;				
+				$user->_is_new = FALSE;
 				$user->load_service_values($this, $data, FALSE);
 				$user->save();
 			}
@@ -160,7 +160,7 @@ abstract class Kohana_Auth_Service {
 	abstract public function logged_in();
 
 	abstract public function login_url($back_url);
-	
+
 	abstract public function logout_service($request, $back_url);
 
 	abstract public function service_user_info();
