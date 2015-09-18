@@ -1,4 +1,9 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
+
+use Facebook\Facebook;
+use Facebook\Exceptions\FacebookResponseException;
+use Facebook\Exceptions\FacebookSDKException;
+
 /**
  * Jam Auth driver.
  *
@@ -15,7 +20,7 @@ abstract class Kohana_Auth_Service_Facebook extends Auth_Service {
 
 	public function initialize()
 	{
-		return new Facebook\Facebook(Arr::get($this->_config, 'auth'));
+		return new Facebook(Arr::get($this->_config, 'auth'));
 	}
 
 	public function logged_in()
@@ -50,9 +55,9 @@ abstract class Kohana_Auth_Service_Facebook extends Auth_Service {
 		try {
 		  $result = $this->api()->get('/me?fields=id,first_name,last_name,email,name');
 
-		} catch(Facebook\Exceptions\FacebookResponseException $exception) {
+		} catch(FacebookResponseException $exception) {
 			throw new Auth_Exception_Service($exception->getMessage(), [], 0, $exception);
-		} catch(Facebook\Exceptions\FacebookSDKException $exception) {
+		} catch(FacebookSDKException $exception) {
 		  throw new Auth_Exception_Service($exception->getMessage(), [], 0, $exception);
 		}
 
@@ -70,9 +75,9 @@ abstract class Kohana_Auth_Service_Facebook extends Auth_Service {
 
 		try {
 		  $accessToken = $helper->getAccessToken();
-		} catch(Facebook\Exceptions\FacebookResponseException $exception) {
+		} catch(FacebookResponseException $exception) {
 			throw new Auth_Exception_Service($exception->getMessage(), [], 0, $exception);
-		} catch(Facebook\Exceptions\FacebookSDKException $exception) {
+		} catch(FacebookSDKException $exception) {
 		  throw new Auth_Exception_Service($exception->getMessage(), [], 0, $exception);
 		}
 
