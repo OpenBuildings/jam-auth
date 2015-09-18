@@ -155,9 +155,28 @@ abstract class Kohana_Auth_Service {
 		}
 	}
 
+	public function complete_login()
+	{
+		if ( ! $this->enabled())
+			return FALSE;
+
+		if ( ! $this->logged_in()) {
+			$this->service_login_complete();
+		}
+
+		if (($user = $this->get_user()))
+		{
+			return $user;
+		}
+
+		return FALSE;
+	}
+
 	abstract public function initialize();
 
 	abstract public function logged_in();
+
+	abstract public function service_login_complete();
 
 	abstract public function login_url($back_url);
 

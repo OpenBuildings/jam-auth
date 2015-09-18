@@ -42,32 +42,37 @@ class Auth_Jam_ServiceTest extends Testcase_Auth {
 	{
 		$facebook = $this
 			->getMockBuilder('Facebook\Facebook')
-			->setMethods(['getCanvasHelper'])
+			->setMethods(['get', 'getDefaultAccessToken'])
 			->disableOriginalConstructor()
 			->getMock();
 
-		$canvas = $this
-			->getMockBuilder('Facebook\FacebookCanvasHelper')
-			->setMethods(['getSignedRequest'])
+		$response = $this
+			->getMockBuilder('Facebook\FacebookResponse')
+			->setMethods(['getGraphObject'])
 			->disableOriginalConstructor()
 			->getMock();
 
-		$signedRequest = $this
-			->getMockBuilder('Facebook\SignedRequest')
-			->setMethods(['getUserId'])
+		$object = $this
+			->getMockBuilder('Facebook\GraphNodes\GraphObject')
+			->setMethods(['getField', 'asArray'])
 			->disableOriginalConstructor()
 			->getMock();
 
 		$facebook
-			->method('getCanvasHelper')
-			->willReturn($canvas);
+			->method('getDefaultAccessToken')
+			->willReturn('test');
 
-		$canvas
-			->method('getSignedRequest')
-			->willReturn($signedRequest);
+		$facebook
+			->method('get')
+			->with($this->equalTo('/me?fields=id,first_name,last_name,email,name'))
+			->willReturn($response);
 
-		$signedRequest
-			->method('getUserId')
+		$response
+			->method('getGraphObject')
+			->willReturn($object);
+
+		$object
+			->method('getField')
 			->willReturn('facebook-test');
 
 		$service = new Auth_Service_Facebook_Test(array('enabled' => TRUE));
@@ -81,9 +86,10 @@ class Auth_Jam_ServiceTest extends Testcase_Auth {
 
 	public function test_get_user()
 	{
+
 		$facebook = $this
 			->getMockBuilder('Facebook\Facebook')
-			->setMethods(['get', 'getCanvasHelper'])
+			->setMethods(['get', 'getDefaultAccessToken'])
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -95,25 +101,17 @@ class Auth_Jam_ServiceTest extends Testcase_Auth {
 
 		$object = $this
 			->getMockBuilder('Facebook\GraphNodes\GraphObject')
-			->setMethods(['asArray'])
-			->disableOriginalConstructor()
-			->getMock();
-
-		$canvas = $this
-			->getMockBuilder('Facebook\FacebookCanvasHelper')
-			->setMethods(['getSignedRequest'])
-			->disableOriginalConstructor()
-			->getMock();
-
-		$signedRequest = $this
-			->getMockBuilder('Facebook\SignedRequest')
-			->setMethods(['getUserId'])
+			->setMethods(['getField', 'asArray'])
 			->disableOriginalConstructor()
 			->getMock();
 
 		$facebook
+			->method('getDefaultAccessToken')
+			->willReturn('test');
+
+		$facebook
 			->method('get')
-			->with($this->equalTo('/me'))
+			->with($this->equalTo('/me?fields=id,first_name,last_name,email,name'))
 			->willReturn($response);
 
 		$response
@@ -121,21 +119,12 @@ class Auth_Jam_ServiceTest extends Testcase_Auth {
 			->willReturn($object);
 
 		$object
-			->method('asArray')
-			->willReturn(['email' => 'admin@example.com']);
-
-		$canvas
-			->method('getSignedRequest')
-			->willReturn($signedRequest);
-
-		$facebook
-			->method('getCanvasHelper')
-			->willReturn($canvas);
-
-		$signedRequest
-			->method('getUserId')
+			->method('getField')
 			->willReturn('facebook-test');
 
+		$object
+			->method('asArray')
+			->willReturn(['email' => 'admin@example.com']);
 
 		$service = new Auth_Service_Facebook_Test(array('enabled' => TRUE));
 		$service->api($facebook);

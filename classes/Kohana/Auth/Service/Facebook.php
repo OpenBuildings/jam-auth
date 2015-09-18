@@ -27,7 +27,9 @@ abstract class Kohana_Auth_Service_Facebook extends Auth_Service {
 	{
 		$helper = $this->api()->getRedirectLoginHelper();
 
-		return $helper->getLoginUrl($back_url);
+		$permissions = ['email'];
+
+		return $helper->getLoginUrl($back_url, $permissions);
 	}
 
 	public function logout_service($request, $back_url)
@@ -43,18 +45,45 @@ abstract class Kohana_Auth_Service_Facebook extends Auth_Service {
 		return FALSE;
 	}
 
+	public function get_user_node()
+	{
+		try {
+		  $result = $this->api()->get('/me?fields=id,first_name,last_name,email,name');
+
+		} catch(Facebook\Exceptions\FacebookResponseException $exception) {
+			throw new Auth_Exception_Service($exception->getMessage(), [], 0, $exception);
+		} catch(Facebook\Exceptions\FacebookSDKException $exception) {
+		  throw new Auth_Exception_Service($exception->getMessage(), [], 0, $exception);
+		}
+
+		return $result->getGraphObject();
+	}
+
 	public function service_user_info()
 	{
-		try
-		{
-			return $this->api()->get('/me')->getGraphObject()->asArray();
+		return $this->get_user_node()->asArray();
+	}
+
+	public function service_login_complete()
+	{
+		$helper = $this->api()->getRedirectLoginHelper();
+
+		try {
+		  $accessToken = $helper->getAccessToken();
+		} catch(Facebook\Exceptions\FacebookResponseException $exception) {
+			throw new Auth_Exception_Service($exception->getMessage(), [], 0, $exception);
+		} catch(Facebook\Exceptions\FacebookSDKException $exception) {
+		  throw new Auth_Exception_Service($exception->getMessage(), [], 0, $exception);
 		}
-		catch (FacebookApiException $exception) {}
+
+		$this->api()->setDefaultAccessToken($accessToken);
 	}
 
 	public function service_uid()
 	{
-		return $this->api()->getCanvasHelper()->getSignedRequest()->getUserId();
+		if ($this->api()->getDefaultAccessToken()) {
+			return $this->get_user_node()->getField('id');
+		}
 	}
 
 } // End Auth Jam
