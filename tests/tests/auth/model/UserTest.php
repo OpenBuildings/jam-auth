@@ -18,12 +18,12 @@ class Auth_Model_UserTest extends PHPUnit_Framework_TestCase {
 		return array(
 			array(1, 'id'),
 			array(NULL, 'id'),
-			array('admin', 'email'),
-			array('user', 'email'),
-			array('login21', 'email'),
+			array('admin', 'username'),
+			array('user', 'username'),
+			array('login21', 'username'),
 			array('admin@example.com', 'email'),
 			array('user@example.com', 'email'),
-			array('user@example23', 'email'),
+			array('user@example23', 'username'),
 		);
 	}
 
@@ -33,7 +33,7 @@ class Auth_Model_UserTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function test_unique_key($value, $expected_attribute)
 	{
-		$this->assertEquals($expected_attribute, Model_Auth_User::unique_key($value));
+		$this->assertEquals($expected_attribute, Jam::meta('test_user')->unique_key($value));
 	}
 
 	public function test_complete_login()
