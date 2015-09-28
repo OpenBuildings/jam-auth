@@ -109,28 +109,28 @@ class Auth_JamTest extends Testcase_Auth {
 		$this->auth->logout();
 	}
 
-	public function test_login_with_service()
+	public function test_complete_login_with_service()
 	{
-		$facebook = $this->getMock('Auth_Service_Facebook', array('login'));
+		$facebook = $this->getMock('Auth_Service_Facebook', array('complete_login'));
 
 		// First attempt fails
 		$facebook
 			->expects($this->at(0))
-			->method('login')
+			->method('complete_login')
 			->will($this->returnValue(FALSE));
 
 		// Second attempt succeeds
 		$facebook
 			->expects($this->at(1))
-			->method('login')
+			->method('complete_login')
 			->will($this->returnValue(Jam::find('test_user', 1)));
 
 		$this->auth->set_service('facebook', $facebook);
 
-		$this->auth->login_with_service('facebook');
+		$this->auth->complete_login_with_service('facebook');
 		$this->assertFalse($this->auth->logged_in(), 'should not be logged in after facebook login FALSE');
 
-		$this->auth->login_with_service('facebook');
+		$this->auth->complete_login_with_service('facebook');
 		$this->assertTrue($this->auth->logged_in(), 'should not be logged in after facebook login TRUE');
 	}
 

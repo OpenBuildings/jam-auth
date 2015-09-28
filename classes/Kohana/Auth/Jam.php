@@ -27,12 +27,12 @@ abstract class Kohana_Auth_Jam extends Auth {
 
 		return (($except_actions AND in_array($action, $except_actions)) OR ( $only_actions AND ! in_array($action, $only_actions))) ? $opposite_access : $default_access;
 	}
-	
+
 	public function __construct($config = array())
 	{
 		parent::__construct($config);
 
-		foreach ($config['services'] as $service => $config) 
+		foreach ($config['services'] as $service => $config)
 		{
 			$class = 'Auth_Service_'.Jam::capitalize_class_name($service);
 			$this->_services[$service] = new $class($config);
@@ -75,7 +75,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 			}
 			elseif (is_string($role) OR $role instanceof Model_Auth_Role)
 			{
-				return $user->roles->has($role);	
+				return $user->roles->has($role);
 			}
 			else
 			{
@@ -88,7 +88,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 	/**
 	 * Getter
 	 * The session instance for the configured session_type
-	 * @return Session 
+	 * @return Session
 	 */
 	public function session()
 	{
@@ -137,7 +137,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 
 	/**
 	 * Create autologin token
-	 * @param  Model_User $user 
+	 * @param  Model_User $user
 	 * @return Model_User_Token
 	 */
 	public function remember($user)
@@ -215,23 +215,34 @@ abstract class Kohana_Auth_Jam extends Auth {
 	/**
 	 * Attempt to login the user using specific service
 	 * @param  string  $name     the name of the service
+	 * @return Model_User|NULL
+	 */
+	public function login_with_service($name)
+	{
+		return $this->services($name)->login();
+	}
+
+	/**
+	 * Attempt to login the user using specific service
+	 * @param  string  $name     the name of the service
 	 * @param  boolean $remember create autologin token
 	 * @return Model_User|NULL
 	 */
-	public function login_with_service($name, $remember = FALSE)
+	public function complete_login_with_service($name, $remember = FALSE)
 	{
-		if ($user = $this->services($name)->login())
-		{	
+		if ($user = $this->services($name)->complete_login())
+		{
 			if ($remember === TRUE)
 			{
 				$this->remember($user);
 			}
-			
+
 			$this->complete_login($user);
+
 			return $user;
 		}
 
-		return FALSE;
+		return NULL;
 	}
 
 	/**
@@ -253,7 +264,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 				return $user;
 		}
 
-		foreach ($this->services() as $service) 
+		foreach ($this->services() as $service)
 		{
 			if ($service->auto_login_enabled() AND $user = $service->get_user())
 			{
@@ -291,7 +302,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 	{
 		if ( ! $user)
 			return NULL;
-		
+
 		return is_object($user) ? $user : Jam::find('user', $user);
 	}
 
@@ -306,8 +317,8 @@ abstract class Kohana_Auth_Jam extends Auth {
 	/**
 	 * Getter / Setter of the autologin cookie
 	 * Extend this method in your tests so you can remove dependance on cookies there
-	 * 
-	 * @param  string $token   
+	 *
+	 * @param  string $token
 	 * @param  integer $expires days lifetime
 	 * @return mixed
 	 */
@@ -317,7 +328,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 		{
 			Cookie::delete('authautologin');
 		}
-		elseif ($token !== NULL) 
+		elseif ($token !== NULL)
 		{
 			Cookie::set('authautologin', $token, $expires);
 		}
@@ -358,7 +369,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 			}
 		}
 
-		foreach ($this->services() as $service) 
+		foreach ($this->services() as $service)
 		{
 			if ($user = $service->get_user())
 			{
@@ -390,9 +401,9 @@ abstract class Kohana_Auth_Jam extends Auth {
 	protected function complete_login($user)
 	{
 		$user->last_login_ip = Request::$client_ip;
-    
+
 		$user->complete_login();
-		
+
 		// Regenerate session_id
 		$this->session()->regenerate();
 

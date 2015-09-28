@@ -8,8 +8,8 @@ return array(
 			'create_user' => TRUE,
 			// 'back_url' => '/',
 			'auth' => array(
-				'appId' => '',
-				'secret' => ''
+				'app_id' => '',
+				'app_secret' => ''
 			)
 		),
 		'twitter' => array(

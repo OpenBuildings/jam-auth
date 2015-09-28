@@ -1,4 +1,9 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
+
+use Facebook\Facebook;
+use Facebook\Exceptions\FacebookResponseException;
+use Facebook\Exceptions\FacebookSDKException;
+
 /**
  * Jam Auth driver.
  *
@@ -8,8 +13,6 @@
  * @license    http://creativecommons.org/licenses/by-sa/3.0/legalcode
  */
 abstract class Kohana_Auth_Service_Facebook extends Auth_Service {
-
-	const LOGOUT_PARAMETER = '_facebook_logged_out';
 
 	protected $_service_field = 'facebook_uid';
 
@@ -22,46 +25,70 @@ abstract class Kohana_Auth_Service_Facebook extends Auth_Service {
 
 	public function logged_in()
 	{
-		return (bool) $this->api()->getUser();
+		return (bool) $this->service_uid();
 	}
 
 	public function login_url($back_url)
 	{
-		return $this->api()->getLoginUrl(array(
-			'redirect_uri' => $back_url,
-		));
+		$helper = $this->api()->getRedirectLoginHelper();
+
+		$permissions = ['email'];
+
+		return $helper->getLoginUrl($back_url, $permissions);
 	}
 
 	public function logout_service($request, $back_url)
 	{
-		if ($request->query(Auth_Service_Facebook::LOGOUT_PARAMETER))
-		{
-			$this->api()->destroySession();
-			return TRUE;
-		}
-		else
-		{
-			$back_url .= (strpos($back_url, '?') === FALSE ? '?' : '&').Auth_Service_Facebook::LOGOUT_PARAMETER.'=1';
+		$helper = $this->api()->getRedirectLoginHelper();
 
-			HTTP::redirect($this->api()->getLogoutUrl(array(
-				'next' => $back_url
-			)));
-			return FALSE;
+		$accessToken = $helper->getAccessToken();
+
+		$logoutUrl = $helper->getLogoutUrl($accessToken, $back_url);
+
+		HTTP::redirect($logoutUrl);
+
+		return FALSE;
+	}
+
+	public function get_user_node()
+	{
+		try {
+		  $result = $this->api()->get('/me?fields=id,first_name,last_name,email,name');
+
+		} catch(FacebookResponseException $exception) {
+			throw new Auth_Exception_Service($exception->getMessage(), [], 0, $exception);
+		} catch(FacebookSDKException $exception) {
+		  throw new Auth_Exception_Service($exception->getMessage(), [], 0, $exception);
 		}
+
+		return $result->getGraphObject();
 	}
 
 	public function service_user_info()
 	{
-		try 
-		{
-			return $this->api()->api('/me');
-		} 
-		catch (FacebookApiException $exception) {}
+		return $this->get_user_node()->asArray();
+	}
+
+	public function service_login_complete()
+	{
+		$helper = $this->api()->getRedirectLoginHelper();
+
+		try {
+		  $accessToken = $helper->getAccessToken();
+		} catch(FacebookResponseException $exception) {
+			throw new Auth_Exception_Service($exception->getMessage(), [], 0, $exception);
+		} catch(FacebookSDKException $exception) {
+		  throw new Auth_Exception_Service($exception->getMessage(), [], 0, $exception);
+		}
+
+		$this->api()->setDefaultAccessToken($accessToken);
 	}
 
 	public function service_uid()
 	{
-		return $this->api()->getUser();
+		if ($this->api()->getDefaultAccessToken()) {
+			return $this->get_user_node()->getField('id');
+		}
 	}
 
 } // End Auth Jam

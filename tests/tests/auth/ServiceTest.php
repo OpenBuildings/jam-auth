@@ -11,7 +11,11 @@ class Auth_Jam_ServiceTest extends Testcase_Auth {
 
 	public function test_api()
 	{
-		$facebook = $this->getMock('Facebook', array(), array(), '', FALSE);
+		$facebook = $this
+			->getMockBuilder('Facebook\Facebook')
+			->disableOriginalConstructor()
+			->getMock();
+
 		$service = new Auth_Service_Facebook_Test(array());
 
 		$service->api($facebook);
@@ -36,11 +40,40 @@ class Auth_Jam_ServiceTest extends Testcase_Auth {
 
 	public function test_build_user()
 	{
-		$facebook = $this->getMock('Facebook', array('getUser'), array(), '', FALSE);
+		$facebook = $this
+			->getMockBuilder('Facebook\Facebook')
+			->setMethods(['get', 'getDefaultAccessToken'])
+			->disableOriginalConstructor()
+			->getMock();
+
+		$response = $this
+			->getMockBuilder('Facebook\FacebookResponse')
+			->setMethods(['getGraphObject'])
+			->disableOriginalConstructor()
+			->getMock();
+
+		$object = $this
+			->getMockBuilder('Facebook\GraphNodes\GraphObject')
+			->setMethods(['getField', 'asArray'])
+			->disableOriginalConstructor()
+			->getMock();
+
 		$facebook
-			->expects($this->any())
-			->method('getUser')
-			->will($this->returnValue('facebook-test'));
+			->method('getDefaultAccessToken')
+			->willReturn('test');
+
+		$facebook
+			->method('get')
+			->with($this->equalTo('/me?fields=id,first_name,last_name,email,name'))
+			->willReturn($response);
+
+		$response
+			->method('getGraphObject')
+			->willReturn($object);
+
+		$object
+			->method('getField')
+			->willReturn('facebook-test');
 
 		$service = new Auth_Service_Facebook_Test(array('enabled' => TRUE));
 		$service->api($facebook);
@@ -53,17 +86,45 @@ class Auth_Jam_ServiceTest extends Testcase_Auth {
 
 	public function test_get_user()
 	{
-		$facebook = $this->getMock('Facebook', array('api', 'getUser'), array(), '', FALSE);
-		$facebook
-			->expects($this->any())
-			->method('api')
-			->with($this->equalTo('/me'))
-			->will($this->returnValue(array('email' => 'admin@example.com')));
+
+		$facebook = $this
+			->getMockBuilder('Facebook\Facebook')
+			->setMethods(['get', 'getDefaultAccessToken'])
+			->disableOriginalConstructor()
+			->getMock();
+
+		$response = $this
+			->getMockBuilder('Facebook\FacebookResponse')
+			->setMethods(['getGraphObject'])
+			->disableOriginalConstructor()
+			->getMock();
+
+		$object = $this
+			->getMockBuilder('Facebook\GraphNodes\GraphObject')
+			->setMethods(['getField', 'asArray'])
+			->disableOriginalConstructor()
+			->getMock();
 
 		$facebook
-			->expects($this->any())
-			->method('getUser')
-			->will($this->returnValue('facebook-test'));
+			->method('getDefaultAccessToken')
+			->willReturn('test');
+
+		$facebook
+			->method('get')
+			->with($this->equalTo('/me?fields=id,first_name,last_name,email,name'))
+			->willReturn($response);
+
+		$response
+			->method('getGraphObject')
+			->willReturn($object);
+
+		$object
+			->method('getField')
+			->willReturn('facebook-test');
+
+		$object
+			->method('asArray')
+			->willReturn(['email' => 'admin@example.com']);
 
 		$service = new Auth_Service_Facebook_Test(array('enabled' => TRUE));
 		$service->api($facebook);
