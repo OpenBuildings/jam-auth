@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 /**
  * Default auth user.
- * 
+ *
  * @package	   Kohana/Auth
  * @author     Ivan Kerin
  * @copyright  (c) 2011-2012 Despark Ltd.
@@ -16,7 +16,7 @@ class Kohana_Model_Auth_User extends Jam_Model {
 	public static function initialize(Jam_Meta $meta)
 	{
 		$meta
-			->name_key('username')
+			->name_key('email')
 
 			->associations(array(
 				'user_tokens' => Jam::association('hasmany'),
@@ -28,7 +28,6 @@ class Kohana_Model_Auth_User extends Jam_Model {
 				'email' => Jam::field('string', array(
 					'label' => 'email address',
 				)),
-				'username' => Jam::field('string'),
 				'password' => Jam::field('password', array(
 					'hash_with' => array(Auth::instance(), 'hash'),
 				)),
@@ -43,15 +42,9 @@ class Kohana_Model_Auth_User extends Jam_Model {
 				'last_login_ip' => Jam::field('string', array('label' => 'Last logged from')),
 			))
 
-		
 			->validator('email', array(
 				'format' => array('email' => TRUE),
 				'unique' => TRUE
-			))
-			->validator('username', array(
-				'length' => array('minimum' => 3, 'maximum' => 32),
-				'present' => TRUE,
-				'format' => array('regex' => '/^[a-zA-Z0-9\_\-]+$/')
 			))
 			->validator('password', array(
 				'length' => array('minimum' => 5, 'maximum' => 30),
@@ -73,7 +66,7 @@ class Kohana_Model_Auth_User extends Jam_Model {
 
 	public static function unique_key($value)
 	{
-		return Valid::email($value) ? 'email' : ((is_numeric($value) OR $value === NULL) ? 'id' : 'username');
+		return (is_numeric($value) OR $value === NULL) ? 'id' : 'email';
 	}
 
 	/**
@@ -98,7 +91,7 @@ class Kohana_Model_Auth_User extends Jam_Model {
 
 	public function load_service_values(Auth_Service $service, array $user_data, $create = FALSE)
 	{
-		
+
 	}
 
 	public function build_user_token(array $values = array())
@@ -107,7 +100,7 @@ class Kohana_Model_Auth_User extends Jam_Model {
 			'expires' => time() + Kohana::$config->load('auth.lifetime'),
 		), $values))->generate_unique_token();
 	}
-	
+
 	public function has_facebook()
 	{
 		return (bool) $this->facebook_uid;

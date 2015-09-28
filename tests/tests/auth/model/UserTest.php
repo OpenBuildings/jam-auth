@@ -33,7 +33,7 @@ class Auth_Model_UserTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function test_unique_key($value, $expected_attribute)
 	{
-		$this->assertEquals($expected_attribute, Model_Auth_User::unique_key($value));
+		$this->assertEquals($expected_attribute, Jam::meta('test_user')->unique_key($value));
 	}
 
 	public function test_complete_login()
