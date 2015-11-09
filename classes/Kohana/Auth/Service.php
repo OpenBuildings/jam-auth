@@ -94,6 +94,11 @@ abstract class Kohana_Auth_Service {
 					if ($user->loaded())
 					{
 						$user->_is_new = FALSE;
+
+                        if (Arr::get($this->_config, 'link_user'))
+                        {
+                            $user->load_service_values($this, $data, FALSE);
+                        }
 					}
 				}
 
