@@ -95,7 +95,7 @@ abstract class Kohana_Auth_Service {
 					{
 						$user->_is_new = FALSE;
 
-                        if (Arr::get($this->_config, 'link_user'))
+                        if (Arr::get($this->_config, 'update_user_on_link'))
                         {
                             $user->load_service_values($this, $data, FALSE);
                         }
