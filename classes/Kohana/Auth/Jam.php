@@ -255,7 +255,13 @@ abstract class Kohana_Auth_Jam extends Auth {
 		if ($token = $this->_autologin_cookie())
 		{
 			if ($user = $this->login_with_token($token))
+			{
 				return $user;
+			}
+			else
+			{
+				$this->_autologin_cookie(FALSE);
+			}
 		}
 
 		if (Request::current() AND $token = Arr::get(Request::current()->query(), '_token'))
