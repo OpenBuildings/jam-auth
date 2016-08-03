@@ -21,8 +21,13 @@
 	},
 	"require-dev": {
 		"kohana/database": "^3.3.0",
-		"phpunit/phpunit": "^5.0",
+		"phpunit/phpunit": ">=4.0,<6.0",
 		"facebook/php-sdk-v4" : "^5.0",
 		"openbuildings/kohana-test-bootstrap": "^0.2"
+	},
+	"config": {
+		"platform": {
+			"php": "5.4"
+		}
 	}
 }
