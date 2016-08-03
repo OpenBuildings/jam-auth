@@ -38,6 +38,7 @@ Kohana::$config
 			'charset'      => 'utf8',
 			'caching'      => FALSE,
 		));
+
 Kohana::$config
 	->load('auth')
 		->set('session_type', 'Auth_Test')

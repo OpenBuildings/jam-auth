@@ -26,8 +26,7 @@ before_script:
   - mysql -e 'create database `test-jam-auth`;'
   - mysql test-jam-auth < tests/database/structure/mysql.sql
 
-script:
-  - phpunit --coverage-clover build/logs/clover.xml
+script: vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar

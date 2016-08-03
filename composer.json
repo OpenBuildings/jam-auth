@@ -15,10 +15,14 @@
 	"require": {
 		"php": ">=5.3.0",
 		"composer/installers": "*",
-		"openbuildings/jam": "^0.5.0"
+		"openbuildings/jam": "^0.5.0",
+		"kohana/core": "^3.3.0",
+		"kohana/auth": "^3.3.0"
 	},
 	"require-dev": {
+		"kohana/database": "^3.3.0",
+		"phpunit/phpunit": "^5.0",
 		"facebook/php-sdk-v4" : "^5.0",
-		"openbuildings/kohana-test-bootsrap": "^0.1.2"
+		"openbuildings/kohana-test-bootstrap": "^0.2"
 	}
 }
