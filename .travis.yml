@@ -4,11 +4,24 @@ language: php
 sudo: false
 
 php:
+  - 5.3
   - 5.4
   - 5.5
   - 5.6
-  - 7
+  - 7.0
   - hhvm
+
+env:
+  - DEPS=normal
+  - DEPS=highest
+  - DEPS=lowest
+
+matrix:
+  fast_finish: true
+
+branches:
+  only:
+    - master
 
 cache:
   directories:
@@ -19,10 +32,15 @@ notifications:
   slack:
     secure: U9WociTUzfzCZIWpYUyf2W4Jc+Ek4DBC0Dm7v+jr9zDTwevyRsglKerrkfgaCgDPP18Ma+j2ANEyPf25HRReJdOmSi02H5PTtcT2DnXUanr8REklrznbXADwayEjN32vArywqRrUq94GioDY3bKXgWve61wt/4YsQMTwZjL09AQ=
 
+before_install: composer selfupdate --preview
+
+install:
+  - if [ "$DEPS" = "normal" ]; then composer install --no-interaction; fi;
+  - if [ "$DEPS" = "highest" ]; then composer update --no-interaction; fi;
+  - if [ "$DEPS" = "lowest" ]; then composer update --no-interaction --prefer-lowest --prefer-stable; fi;
+
 before_script:
   - mkdir -p build/logs
-  - composer selfupdate
-  - composer install --no-interaction
   - mysql -e 'create database `test-jam-auth`;'
   - mysql test-jam-auth < tests/database/structure/mysql.sql
 
