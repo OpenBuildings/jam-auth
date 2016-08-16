@@ -3,3 +3,6 @@
 /vendor/
 /build/
 /modules/
+
+# Put local modifications to the PHPUnit configuration in this file
+/phpunit.xml

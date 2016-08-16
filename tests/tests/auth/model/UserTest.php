@@ -38,7 +38,10 @@ class Auth_Model_UserTest extends PHPUnit_Framework_TestCase {
 
 	public function test_complete_login()
 	{
-		$user = $this->getMock('Model_Test_User', array('save'), array('test_user'));
+		$user = $this->getMockBuilder('Model_Test_User')
+			->setMethods(array('save'))
+			->setConstructorArgs(array('test_user'))
+			->getMock();
 		$user
 			->expects($this->never())
 			->method('save');
@@ -47,7 +50,11 @@ class Auth_Model_UserTest extends PHPUnit_Framework_TestCase {
 
 		$user->complete_login();
 
-		$loaded_user = $this->getMock('Model_Test_User', array('save'), array('test_user'));
+		$loaded_user = $this->getMockBuilder('Model_Test_User')
+			->setMethods(array('save'))
+			->setConstructorArgs(array('test_user'))
+			->getMock();
+
 		$loaded_user
 			->expects($this->once())
 			->method('save');

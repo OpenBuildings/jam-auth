@@ -110,7 +110,9 @@ class Auth_JamTest extends Testcase_Auth {
 
 	public function test_complete_login_with_service()
 	{
-		$facebook = $this->getMock('Auth_Service_Facebook', array('complete_login'));
+		$facebook = $this->getMockBuilder('Auth_Service_Facebook')
+			->setMethods(array('complete_login'))
+			->getMock();
 
 		// First attempt fails
 		$facebook
@@ -135,7 +137,10 @@ class Auth_JamTest extends Testcase_Auth {
 
 	public function test_auto_login()
 	{
-		$facebook = $this->getMock('Auth_Service_Facebook', array('get_user'), array(array('auto_login' => TRUE, 'enabled' => TRUE)));
+		$facebook = $this->getMockBuilder('Auth_Service_Facebook')
+			->setMethods(array('get_user'))
+			->setConstructorArgs(array(array('auto_login' => TRUE, 'enabled' => TRUE)))
+			->getMock();
 
 		$this->auth->set_service('facebook', $facebook);
 
@@ -150,7 +155,10 @@ class Auth_JamTest extends Testcase_Auth {
 
 	public function test_get_user()
 	{
-		$facebook = $this->getMock('Auth_Service_Facebook', array('get_user'), array(array('auto_login' => TRUE, 'enabled' => TRUE)));
+		$facebook = $this->getMockBuilder('Auth_Service_Facebook')
+			->setMethods(array('get_user'))
+			->setConstructorArgs(array(array('auto_login' => TRUE, 'enabled' => TRUE)))
+			->getMock();
 
 		$this->auth->set_service('facebook', $facebook);
 
