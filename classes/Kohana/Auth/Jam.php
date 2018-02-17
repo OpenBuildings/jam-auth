@@ -402,7 +402,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 	 * session data: user_id, username, roles.
 	 *
 	 * @param   object  $user Jam object
-	 * @return  void
+	 * @return  bool
 	 */
 	protected function complete_login($user)
 	{
