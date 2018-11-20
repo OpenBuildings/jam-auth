@@ -71,14 +71,4 @@ class Kohana_Model_Auth_User_Token extends Jam_Model {
 
 		return $this;	
 	}
-
-	public function __construct($id = NULL)
-	{
-		parent::__construct($id);
-
-		if (mt_rand(1, 100) === 1)
-		{
-			Jam::delete($this)->expired()->execute();
-		}
-	}
 }
