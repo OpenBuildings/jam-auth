@@ -1,6 +1,10 @@
-<?php defined('SYSPATH') OR die('No direct script access.');
+<?php
 
-class Testcase_Auth extends PHPUnit_Framework_TestCase {
+defined('SYSPATH') OR die('No direct script access.');
+
+use PHPUnit\Framework\TestCase;
+
+class Testcase_Auth extends TestCase {
 
 	protected $auth;
 
