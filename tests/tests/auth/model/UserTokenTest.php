@@ -1,4 +1,8 @@
-<?php defined('SYSPATH') OR die('No direct script access.');
+<?php
+
+defined('SYSPATH') OR die('No direct script access.');
+
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests Manytomany fields.
@@ -8,7 +12,7 @@
  * @group   jam-auth.model
  * @group   jam-auth.model.user_token
  */
-class Auth_Model_UserTokenTest extends PHPUnit_Framework_TestCase {
+class Auth_Model_UserTokenTest extends TestCase {
 
 	public function test_find_by_token()
 	{

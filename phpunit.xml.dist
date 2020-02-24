@@ -1,7 +1,21 @@
 <phpunit colors="true" bootstrap="tests/bootstrap.php">
 	<testsuites>
-		<testsuite>
-			<directory>tests/tests</directory>
+		<testsuite name="RootTestSuite">
+			<directory suffix="Test.php">tests/tests</directory>
 		</testsuite>
 	</testsuites>
+	<filter>
+		<whitelist>
+			<directory suffix=".php">classes</directory>
+			<directory suffix=".php">config</directory>
+		</whitelist>
+	</filter>
+	<logging>
+		<log type="coverage-html"
+			 target="build/coverage"
+			 lowUpperBound="80"
+			 highLowerBound="90"
+			 showUncoveredFiles="true"
+		/>
+	</logging>
 </phpunit>

@@ -1,4 +1,8 @@
-<?php defined('SYSPATH') OR die('No direct script access.');
+<?php
+
+defined('SYSPATH') OR die('No direct script access.');
+
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests Manytomany fields.
@@ -9,7 +13,7 @@
  * @group   jam.field.twitter
  * @author Haralan Dobrev
  */
-class Field_TwitterTest extends PHPUnit_Framework_TestCase {
+class Field_TwitterTest extends TestCase {
 
 	public function test_construction()
 	{

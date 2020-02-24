@@ -1,4 +1,8 @@
-<?php defined('SYSPATH') OR die('No direct script access.');
+<?php
+
+defined('SYSPATH') OR die('No direct script access.');
+
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests Manytomany fields.
@@ -8,7 +12,7 @@
  * @group   jam-auth.model
  * @group   jam-auth.model.user
  */
-class Auth_Model_UserTest extends PHPUnit_Framework_TestCase {
+class Auth_Model_UserTest extends TestCase {
 
 	/**
 	 * Provider for test_unique_key
