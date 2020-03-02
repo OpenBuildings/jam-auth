@@ -15,7 +15,7 @@
 	"require": {
 		"php": "^7.1",
 		"composer/installers": "*",
-		"openbuildings/jam": "^0.5.13",
+		"openbuildings/jam": "^0.6",
 		"kohana/core": "^3.3.0",
 		"kohana/auth": "^3.3.0"
 	},

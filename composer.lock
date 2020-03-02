@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e000b149e4c3568b178a853c120f5b06",
+    "content-hash": "1fec7fcac44d4e1fd65e51d23db46d92",
     "packages": [
         {
             "name": "composer/installers",
@@ -407,16 +407,16 @@
         },
         {
             "name": "openbuildings/jam",
-            "version": "0.5.24",
+            "version": "0.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenBuildings/jam.git",
-                "reference": "3239e93564d100ddb65055235f87ec99fc0d4370"
+                "reference": "dbaa321ebbce31374db45bc85f1d60d118e4cc02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenBuildings/jam/zipball/3239e93564d100ddb65055235f87ec99fc0d4370",
-                "reference": "3239e93564d100ddb65055235f87ec99fc0d4370",
+                "url": "https://api.github.com/repos/OpenBuildings/jam/zipball/dbaa321ebbce31374db45bc85f1d60d118e4cc02",
+                "reference": "dbaa321ebbce31374db45bc85f1d60d118e4cc02",
                 "shasum": ""
             },
             "require": {
@@ -425,15 +425,14 @@
                 "kohana/database": "^3.3.0",
                 "kohana/image": "^3.3.0",
                 "openbuildings/flex-storage": "^0.1.3",
-                "php": ">=5.4"
+                "php": "^7.1"
             },
             "require-dev": {
-                "openbuildings/jam-monetary": "^0.1",
+                "openbuildings/jam-monetary": "^0.2",
                 "openbuildings/kohana-test-bootstrap": "^0.2",
-                "phpunit/phpunit": "~4.0.0",
-                "phpunit/phpunit-dom-assertions": "^0.1",
-                "symfony/css-selector": ">=2.3",
-                "symfony/dom-crawler": ">=2.3"
+                "phpunit/phpunit": "^7",
+                "symfony/css-selector": "^4.4",
+                "symfony/dom-crawler": "^4.4"
             },
             "suggest": {
                 "openbuildings/jam-auth": "A Kohana Auth implementation for Jam, with services",
@@ -463,7 +462,7 @@
                 "upload",
                 "validation"
             ],
-            "time": "2018-10-11T08:08:53+00:00"
+            "time": "2020-02-28T09:50:03+00:00"
         },
         {
             "name": "rackspace/php-opencloud",
